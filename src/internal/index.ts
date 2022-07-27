@@ -1,4 +1,5 @@
 import './bjerk-io';
+import './bjerk-minecraft';
 import './btools';
 import './tax-notifier';
 import './timely-agent';
