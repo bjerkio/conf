@@ -13,7 +13,7 @@ export const setup = new ProjectOnGithub(
   {
     projectName: 'timely-agent',
     folderId: folder.id,
-    repository: 'timely-agent',
+    repositories: ['timely-agent', 'timely-app'],
   },
   { providers: [bjerkio] },
 );
