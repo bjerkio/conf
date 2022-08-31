@@ -15,7 +15,7 @@ export const setup = new ProjectOnGithub(
   {
     projectName: name,
     folderId: folder.id,
-    repository: 'slack-tripletex-agent',
+    repositories: ['slack-tripletex-agent'],
   },
   { providers: [bjerkio] },
 );

@@ -7,7 +7,7 @@ export const setup = new ProjectOnGithub(
   {
     projectName: 'bjerk-tax-notifier',
     folderId: folder.id,
-    repository: 'tax-notifier',
+    repositories: ['tax-notifier'],
   },
   { providers: [bjerkio] },
 );

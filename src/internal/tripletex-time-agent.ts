@@ -13,7 +13,7 @@ export const setup = new ProjectOnGithub(
   {
     projectName: 'tripletex-time-agent',
     folderId: folder.id,
-    repository: 'tripletex-time-agent',
+    repositories: ['tripletex-time-agent'],
   },
   { providers: [bjerkio] },
 );
