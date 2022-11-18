@@ -14,9 +14,9 @@ export const folder = new gcp.organizations.Folder(
 );
 
 const serviceAccount = new gcp.serviceaccount.Account(
-  'conf-service-account',
+  'conf-deployer',
   {
-    accountId: 'conf-service-account',
+    accountId: 'conf-deployer',
   },
   { provider: coreGoogleProvider },
 );
