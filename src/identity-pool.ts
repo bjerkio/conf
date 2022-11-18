@@ -44,10 +44,10 @@ export class GithubIdentityPoolIamMember extends pulumi.ComponentResource {
     opts?: pulumi.ComponentResourceOptions,
   ) {
     super('bjerkio:github:GithubIdentityPoolIamMember', name, {}, opts);
-    const { owner, repo, serviceAccountId } = args;
+    const { serviceAccountId } = args;
 
     new gcp.serviceaccount.IAMMember(
-      `iam-workload-${repo}`,
+      `iam-workload-${name}`,
       {
         serviceAccountId,
         role: 'roles/iam.workloadIdentityUser',
@@ -57,11 +57,11 @@ export class GithubIdentityPoolIamMember extends pulumi.ComponentResource {
     );
 
     new gcp.serviceaccount.IAMMember(
-      `iam-infra-token-${repo}`,
+      `iam-infra-token-${name}`,
       {
         serviceAccountId,
         role: 'roles/iam.serviceAccountTokenCreator',
-        member: pulumi.interpolate`principalSet://iam.googleapis.com/${identityPool.name}/attribute.repository/${owner}/${repo}`,
+        member: getIdentityPoolMember(args.owner, args.repo),
       },
       { provider, deleteBeforeReplace: true },
     );

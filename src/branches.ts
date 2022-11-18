@@ -25,8 +25,8 @@ new IdentityPoolGithubSetup(
   'conf',
   {
     repo: 'conf',
-    owner: 'bjerkio',
-    serviceAccountId: serviceAccount.email,
+    owner: 'getbranches',
+    serviceAccountId: serviceAccount.id,
     projectId: coreProject,
   },
   { providers: [coreGoogleProvider] },
