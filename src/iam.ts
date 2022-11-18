@@ -1,7 +1,11 @@
 import * as gcp from '@pulumi/gcp';
+import { provider } from './providers/core-google';
 
-new gcp.projects.IAMPolicy('iam', {
-  policyData:
-    '{"bindings":[{"members":["serviceAccount:deploy@bjerk-core.iam.gserviceaccount.com"],"role":"roles/owner"}]}',
-  project: 'bjerk-core',
-});
+new gcp.projects.IAMMember(
+  'core-iam',
+  {
+    role: 'roles/owner',
+    member: 'serviceAccount:deploy@bjerk-core.iam.gserviceaccount.com',
+  },
+  { provider },
+);
