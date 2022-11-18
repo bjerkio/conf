@@ -4,10 +4,14 @@ import { coreProject, organizationNumber } from './config';
 import { provider as coreGoogleProvider } from './providers/core-google';
 import { interpolate } from '@pulumi/pulumi';
 
-export const folder = new gcp.organizations.Folder('branches-folder', {
-  displayName: 'Branches',
-  parent: `organizations/${organizationNumber}`,
-});
+export const folder = new gcp.organizations.Folder(
+  'branches-folder',
+  {
+    displayName: 'Branches',
+    parent: `organizations/${organizationNumber}`,
+  },
+  { provider: coreGoogleProvider },
+);
 
 const serviceAccount = new gcp.serviceaccount.Account(
   'conf-service-account',
