@@ -1,7 +1,6 @@
 import * as gcp from '@pulumi/gcp';
 import { IdentityPoolGithubSetup } from './components/identity-pool-github';
 import { coreProject, organizationNumber } from './config';
-import { provider as githubProvider } from './providers/github';
 import { provider as coreGoogleProvider } from './providers/core-google';
 import { interpolate } from '@pulumi/pulumi';
 
@@ -26,7 +25,7 @@ new IdentityPoolGithubSetup(
     serviceAccountId: serviceAccount.email,
     projectId: coreProject,
   },
-  { providers: [githubProvider, coreGoogleProvider] },
+  { providers: [coreGoogleProvider] },
 );
 
 new gcp.folder.IAMMember(
