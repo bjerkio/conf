@@ -3,6 +3,7 @@ import { IdentityPoolGithubSetup } from './components/identity-pool-github';
 import { coreProject, organizationNumber } from './config';
 import { provider as coreGoogleProvider } from './providers/core-google';
 import { interpolate } from '@pulumi/pulumi';
+import { branches } from './github-orgs';
 
 export const folder = new gcp.organizations.Folder(
   'branches-folder',
@@ -29,7 +30,7 @@ new IdentityPoolGithubSetup(
     serviceAccountId: serviceAccount.id,
     projectId: coreProject,
   },
-  { providers: [coreGoogleProvider] },
+  { providers: [coreGoogleProvider, branches] },
 );
 
 new gcp.folder.IAMMember(
