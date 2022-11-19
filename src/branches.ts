@@ -1,6 +1,6 @@
 import * as gcp from '@pulumi/gcp';
 import { IdentityPoolGithubSetup } from './components/identity-pool-github';
-import { coreProject, organizationNumber } from './config';
+import { billingAccount, coreProject, organizationNumber } from './config';
 import { provider as coreGoogleProvider } from './providers/core-google';
 import { interpolate } from '@pulumi/pulumi';
 import { branches } from './github-orgs';
@@ -38,6 +38,16 @@ new gcp.folder.IAMMember(
   {
     folder: folder.name,
     role: 'roles/resourcemanager.projectCreator',
+    member: interpolate`serviceAccount:${serviceAccount.email}`,
+  },
+  { provider: coreGoogleProvider },
+);
+
+new gcp.billing.AccountIamMember(
+  'branches-billing-account-user',
+  {
+    billingAccountId: billingAccount,
+    role: 'roles/billing.user',
     member: interpolate`serviceAccount:${serviceAccount.email}`,
   },
   { provider: coreGoogleProvider },
