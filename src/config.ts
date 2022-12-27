@@ -7,3 +7,6 @@ export const pulumiAccessToken = pulumi.secret<string>(process.env.PULUMI_ACCESS
 export const githubToken = pulumi.secret<string>(process.env.GITHUB_TOKEN);
 
 export const coreProject = 'bjerk-core';
+
+const branchesConfig = new pulumi.Config('branches');
+export const branchesDevelopers = branchesConfig.requireObject<string[]>('developers');

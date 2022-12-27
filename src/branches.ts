@@ -1,6 +1,11 @@
 import * as gcp from '@pulumi/gcp';
 import { IdentityPoolGithubSetup } from './components/identity-pool-github';
-import { billingAccount, coreProject, organizationNumber } from './config';
+import {
+  billingAccount,
+  branchesDevelopers,
+  coreProject,
+  organizationNumber,
+} from './config';
 import { provider as coreGoogleProvider } from './providers/core-google';
 import { interpolate } from '@pulumi/pulumi';
 import { branches } from './github-orgs';
@@ -51,4 +56,13 @@ new gcp.billing.AccountIamMember(
     member: interpolate`serviceAccount:${serviceAccount.email}`,
   },
   { provider: coreGoogleProvider },
+);
+
+branchesDevelopers.map(
+  (developer) =>
+    new gcp.serviceaccount.IAMMember(`${developer}-branches-impersonation`, {
+      serviceAccountId: serviceAccount.id,
+      role: 'roles/iam.serviceAccountTokenCreator',
+      member: `user:${developer}`,
+    }),
 );
