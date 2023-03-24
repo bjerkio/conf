@@ -5,9 +5,9 @@ import { folder } from './folder';
 import { basssene, flexiSoft } from '../github-orgs';
 
 export const setup = new ProjectOnGithub(
-  'flexi-soft',
+  'flexisoft',
   {
-    projectName: 'flexi-soft-portal',
+    projectName: 'flexisoft-portal',
     folderId: folder.id,
     repository: 'conf',
   },
