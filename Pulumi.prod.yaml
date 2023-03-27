@@ -3,6 +3,9 @@ config:
     secure: AAABAEU/AT0YecFWCtiZTs5/idAfjuuY4dGFeS+l3onG8KZ3RBJcpO1bWpABu9mZrorP4w==
   bjerk-core-infra:developers:
     - group:developers@bjerk.io
+  flexisoft:owners:
+    - so@bjerk.io
+    - brage@bjerk.io
   branches:developers:
     - so@bjerk.io
     - brage@bjerk.io

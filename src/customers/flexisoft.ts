@@ -1,9 +1,9 @@
 import * as pulumi from '@pulumi/pulumi';
-import * as gcp from '@pulumi/gcp';
 import { ProjectOnGithub } from '../components/projects-on-github';
 import { folder } from './folder';
-import { basssene, flexiSoft } from '../github-orgs';
-import { developers } from '../config';
+import { flexiSoft } from '../github-orgs';
+
+const config = new pulumi.Config('flexisoft');
 
 export const setup = new ProjectOnGithub(
   'flexisoft',
@@ -12,7 +12,7 @@ export const setup = new ProjectOnGithub(
     folderId: folder.id,
     repository: 'conf',
     // TODO: Restrict access
-    owners: developers,
+    owners: config.requireObject<string[]>('owners'),
   },
   { providers: [flexiSoft] },
 );
