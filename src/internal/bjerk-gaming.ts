@@ -2,7 +2,6 @@ import * as gcp from '@pulumi/gcp';
 import { ProjectOnGithub } from '../components/projects-on-github';
 import { folder } from './folder';
 import { bjerkio } from '../github-orgs';
-import { interpolate } from '@pulumi/pulumi';
 
 export const setup = new ProjectOnGithub(
   'bjerk-gaming',
@@ -13,12 +12,6 @@ export const setup = new ProjectOnGithub(
   },
   { providers: [bjerkio] },
 );
-
-export const ownerRole = new gcp.projects.IAMMember('bjerk-gaming-iam-cobraz', {
-  member: interpolate`user:so@bjerk.io`,
-  role: 'roles/owner',
-  project: 'bjerk-gaming',
-});
 
 export const services = [
   'servicemanagement.googleapis.com',

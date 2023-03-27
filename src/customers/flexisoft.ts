@@ -3,6 +3,7 @@ import * as gcp from '@pulumi/gcp';
 import { ProjectOnGithub } from '../components/projects-on-github';
 import { folder } from './folder';
 import { basssene, flexiSoft } from '../github-orgs';
+import { developers } from '../config';
 
 export const setup = new ProjectOnGithub(
   'flexisoft',
@@ -10,15 +11,8 @@ export const setup = new ProjectOnGithub(
     projectName: 'flexisoft-portal',
     folderId: folder.id,
     repository: 'conf',
+    // TODO: Restrict access
+    owners: developers,
   },
   { providers: [flexiSoft] },
-);
-
-export const dnsRole = new gcp.projects.IAMMember(
-  'flexisoft-dns-iam',
-  {
-    member: pulumi.interpolate`serviceAccount:${setup.serviceAccount.email}`,
-    role: 'roles/owner',
-  },
-  { provider: setup.googleProvider },
 );

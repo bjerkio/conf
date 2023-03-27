@@ -3,6 +3,8 @@ import { billingAccount, pulumiAccessToken } from '../config';
 import * as gcp from '@pulumi/gcp';
 import * as github from '@pulumi/github';
 import { invariant } from '../utils';
+import { GCPCredentials } from './gcp-credentials-interface';
+import { GitHubGCPServiceAccountKeyCredentials } from './github-gcp-sa-key-credentials';
 
 export interface ProjectOnGithubSpec {
   projectName?: pulumi.Input<string>;
@@ -12,6 +14,22 @@ export interface ProjectOnGithubSpec {
   repository?: pulumi.Input<string>;
   repositories?: pulumi.Input<string>[];
   projectAliases?: pulumi.Input<pulumi.URN | pulumi.Alias>[];
+
+  /**
+   * @default service-account-key
+   *
+   *
+   * TODO: Add 'identity-pool' as an option
+   */
+  credentialsType?: 'service-account-key';
+
+  /**
+   * Add Pulumi access token to GitHub secrets
+   * @default true
+   */
+  addPulumiAccessToken?: boolean;
+
+  owners?: pulumi.Input<string>[];
 }
 
 export class ProjectOnGithub extends pulumi.ComponentResource {
@@ -20,11 +38,12 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
   // Google Provider
   readonly googleProvider: gcp.Provider;
 
-  // Service Account
-  readonly serviceAccount: gcp.serviceaccount.Account;
-  readonly serviceAccountKey: gcp.serviceaccount.Key;
+  // Credentials
+  readonly credentials: GCPCredentials;
 
-  readonly secrets: github.ActionsSecret[];
+  readonly serviceAccount: gcp.serviceaccount.Account;
+
+  readonly roles: pulumi.Output<gcp.projects.IAMMember[]>;
 
   constructor(
     name: string,
@@ -39,6 +58,9 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
       folderId,
       repositories = args.repository ? [args.repository] : [],
       projectAliases,
+      owners = [],
+      credentialsType = 'service-account-key',
+      addPulumiAccessToken = true,
     } = args;
 
     if (!project) {
@@ -76,17 +98,35 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
       { provider: this.googleProvider, parent: this },
     );
 
-    this.serviceAccountKey = new gcp.serviceaccount.Key(
-      name,
-      {
-        serviceAccountId: this.serviceAccount.accountId,
-      },
-      { provider: this.googleProvider, parent: this },
+    this.roles = pulumi.all(owners).apply((owners) =>
+      owners.map(
+        (member) =>
+          new gcp.projects.IAMMember(
+            `${name}-owner-${member}`,
+            {
+              member,
+              role: 'roles/owner',
+            },
+            { parent: this },
+          ),
+      ),
     );
 
-    this.secrets = [
-      // Pulumi access tokens secret
-      ...repositories.map(
+    if (credentialsType === 'service-account-key') {
+      this.credentials = new GitHubGCPServiceAccountKeyCredentials(
+        name,
+        {
+          repositories,
+          projectId: this.project.projectId,
+          owners,
+          serviceAccount: this.serviceAccount,
+        },
+        { providers: [this.googleProvider], parent: this },
+      );
+    }
+
+    if (addPulumiAccessToken) {
+      repositories.map(
         (repository) =>
           new github.ActionsSecret(
             `${repository}-${name}-pulumi`,
@@ -97,33 +137,7 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
             },
             { parent: this },
           ),
-      ),
-      // GCP Project access
-      ...repositories.map(
-        (repository) =>
-          new github.ActionsSecret(
-            `${repository}-${name}-gcp-key`,
-            {
-              secretName: 'GOOGLE_PROJECT_SA_KEY',
-              plaintextValue: this.serviceAccountKey.privateKey,
-              repository,
-            },
-            { parent: this },
-          ),
-      ),
-      // Google project ID
-      ...repositories.map(
-        (repository) =>
-          new github.ActionsSecret(
-            `${repository}-${name}-gcp-project`,
-            {
-              secretName: 'GOOGLE_PROJECT_ID',
-              plaintextValue: this.project.projectId,
-              repository,
-            },
-            { parent: this },
-          ),
-      ),
-    ];
+      );
+    }
   }
 }

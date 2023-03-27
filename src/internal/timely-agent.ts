@@ -18,15 +18,6 @@ export const setup = new ProjectOnGithub(
   { providers: [bjerkio] },
 );
 
-export const dnsRole = new gcp.projects.IAMMember(
-  'timely-agent-owner-iam',
-  {
-    member: pulumi.interpolate`serviceAccount:${setup.serviceAccount.email}`,
-    role: 'roles/owner',
-  },
-  { provider: setup.googleProvider },
-);
-
 new ProjectSlackLogger(
   'timely-agent',
   { channel: config.require('slack-channel') },
