@@ -1,4 +1,3 @@
-import * as pulumi from '@pulumi/pulumi';
 import * as gcp from '@pulumi/gcp';
 import { ProjectOnGithub } from '../components/projects-on-github';
 import { folder } from './folder';
@@ -18,15 +17,6 @@ export const setup = new ProjectOnGithub(
     repositories: ['slack-tripletex-agent'],
   },
   { providers: [bjerkio] },
-);
-
-export const dnsRole = new gcp.projects.IAMMember(
-  `${name}-owner-iam`,
-  {
-    member: pulumi.interpolate`serviceAccount:${setup.serviceAccount.email}`,
-    role: 'roles/owner',
-  },
-  { provider: setup.googleProvider },
 );
 
 export const services = [

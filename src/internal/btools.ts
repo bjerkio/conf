@@ -30,22 +30,12 @@ export const setup = new ProjectOnGithub(
   { providers: [githubProvider] },
 );
 
-export const ownerRole = new gcp.projects.IAMMember(
-  'btools-owner-iam',
-  {
-    member: pulumi.interpolate`serviceAccount:${setup.serviceAccount.email}`,
-    role: 'roles/owner',
-  },
-  { provider: setup.googleProvider },
-);
-
 export const googleProvider = new gcp.Provider(
   'btools-google-provider',
   {
     project: project.name,
   }
 );
-
 
 export const services = [
   'servicemanagement.googleapis.com',

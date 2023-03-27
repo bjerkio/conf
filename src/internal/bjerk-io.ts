@@ -16,12 +16,3 @@ export const setup = new ProjectOnGithub(
   },
   { providers: [bjerkio] },
 );
-
-export const dnsRole = new gcp.projects.IAMMember(
-  'bjerk-io-owner-iam',
-  {
-    member: pulumi.interpolate`serviceAccount:${setup.serviceAccount.email}`,
-    role: 'roles/owner',
-  },
-  { provider: setup.googleProvider },
-);

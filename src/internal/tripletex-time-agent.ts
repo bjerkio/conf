@@ -54,15 +54,6 @@ export const apiServices = services.map(
     ),
 );
 
-export const dnsRole = new gcp.projects.IAMMember(
-  'tripletex-time-agent-owner-iam',
-  {
-    member: pulumi.interpolate`serviceAccount:${setup.serviceAccount.email}`,
-    role: 'roles/owner',
-  },
-  { provider: setup.googleProvider },
-);
-
 new ProjectSlackLogger(
   'tripletex-time-agent',
   { channel: config.require('slack-channel') },
