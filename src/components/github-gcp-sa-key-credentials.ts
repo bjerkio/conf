@@ -12,7 +12,6 @@ export class GitHubGCPServiceAccountKeyCredentials
   readonly serviceAccountKey: gcp.serviceaccount.Key;
 
   readonly secrets: pulumi.Output<github.ActionsSecret[]>;
-  readonly serviceAccountRole: gcp.projects.IAMMember;
 
   constructor(
     name: string,
@@ -24,7 +23,6 @@ export class GitHubGCPServiceAccountKeyCredentials
       repositories,
       projectId,
       serviceAccount,
-      serviceAccountRole = 'roles/owner',
     } = args;
 
     this.serviceAccountKey = new gcp.serviceaccount.Key(
@@ -42,17 +40,6 @@ export class GitHubGCPServiceAccountKeyCredentials
         ],
       },
     );
-
-    if (serviceAccountRole) {
-      this.serviceAccountRole = new gcp.projects.IAMMember(
-        `${name}-service-account`,
-        {
-          member: pulumi.interpolate`serviceAccount:${serviceAccount.email}`,
-          role: serviceAccountRole,
-        },
-        { parent: this },
-      );
-    }
 
     this.secrets = pulumi.output([
       // GCP Project access

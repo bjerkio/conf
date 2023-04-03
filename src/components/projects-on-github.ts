@@ -29,6 +29,8 @@ export interface ProjectOnGithubSpec {
    */
   addPulumiAccessToken?: boolean;
 
+  serviceAccountRole?: pulumi.Input<string>;
+
   owners?: pulumi.Input<string>[];
 }
 
@@ -44,6 +46,7 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
   readonly serviceAccount: gcp.serviceaccount.Account;
 
   readonly roles: pulumi.Output<gcp.projects.IAMMember[]>;
+  readonly serviceAccountRole: gcp.projects.IAMMember;
 
   constructor(
     name: string,
@@ -61,6 +64,7 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
       owners = [],
       credentialsType = 'service-account-key',
       addPulumiAccessToken = true,
+      serviceAccountRole = 'roles/owner',
     } = args;
 
     if (!project) {
@@ -97,6 +101,26 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
       },
       { provider: this.googleProvider, parent: this },
     );
+
+    if (serviceAccountRole) {
+      this.serviceAccountRole = new gcp.projects.IAMMember(
+        `${name}-service-account`,
+        {
+          member: pulumi.interpolate`serviceAccount:${this.serviceAccount.email}`,
+          role: serviceAccountRole,
+        },
+        {
+          parent: this,
+          provider: this.googleProvider,
+          aliases: [
+            {
+              name: `${name}-service-account`,
+              parent: `urn:pulumi:prod::bjerk-core-infra::bjerk:project$bjerk:github-gcp-service-account-credentials::${name}`,
+            },
+          ],
+        },
+      );
+    }
 
     this.roles = pulumi.all(owners).apply((owners) =>
       owners.map(
