@@ -4,8 +4,8 @@ config:
   bjerk-core-infra:developers:
     - group:developers@bjerk.io
   flexisoft:owners:
-    - so@bjerk.io
-    - brage@bjerk.io
+    - user:so@bjerk.io
+    - user:brage@bjerk.io
   branches:developers:
     - so@bjerk.io
     - brage@bjerk.io
