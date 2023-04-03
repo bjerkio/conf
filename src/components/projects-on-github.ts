@@ -131,7 +131,7 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
               member,
               role: 'roles/owner',
             },
-            { parent: this },
+            { provider: this.googleProvider, parent: this },
           ),
       ),
     );
