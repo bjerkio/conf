@@ -11,6 +11,7 @@ export const setup = new ProjectOnGithub(
     projectName: 'flexisoft-portal',
     folderId: folder.id,
     repository: 'conf',
+    billingAccount: '0139CF-0C97EA-F3F6D9',
     // TODO: Restrict access
     owners: config.requireObject<string[]>('owners'),
   },

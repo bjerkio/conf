@@ -1,5 +1,5 @@
 import * as pulumi from '@pulumi/pulumi';
-import { billingAccount, pulumiAccessToken } from '../config';
+import { billingAccount as defaultBillingAccount, pulumiAccessToken } from '../config';
 import * as gcp from '@pulumi/gcp';
 import * as github from '@pulumi/github';
 import { invariant } from '../utils';
@@ -14,6 +14,11 @@ export interface ProjectOnGithubSpec {
   repository?: pulumi.Input<string>;
   repositories?: pulumi.Input<string>[];
   projectAliases?: pulumi.Input<pulumi.URN | pulumi.Alias>[];
+
+  /**
+   * Defaults to the billing account in config.ts
+   */
+  billingAccount?: pulumi.Input<string>;
 
   /**
    * @default service-account-key
@@ -65,6 +70,7 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
       credentialsType = 'service-account-key',
       addPulumiAccessToken = true,
       serviceAccountRole = 'roles/owner',
+      billingAccount = defaultBillingAccount,
     } = args;
 
     if (!project) {
