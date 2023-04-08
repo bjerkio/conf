@@ -1,10 +1,15 @@
 import * as pulumi from '@pulumi/pulumi';
-import { billingAccount as defaultBillingAccount, pulumiAccessToken } from '../config';
+import {
+  billingAccount as defaultBillingAccount,
+  pulumiAccessToken,
+} from '../config';
 import * as gcp from '@pulumi/gcp';
 import * as github from '@pulumi/github';
 import { invariant } from '../utils';
 import { GCPCredentials } from './gcp-credentials-interface';
-import { GitHubGCPServiceAccountKeyCredentials } from './github-gcp-sa-key-credentials';
+import { interpolate } from '@pulumi/pulumi';
+import { IdentityPoolGithubSetup } from './identity-pool-github';
+import { provider as coreProvider } from '../providers/core-google';
 
 export interface ProjectOnGithubSpec {
   projectName?: pulumi.Input<string>;
@@ -21,16 +26,8 @@ export interface ProjectOnGithubSpec {
   billingAccount?: pulumi.Input<string>;
 
   /**
-   * @default service-account-key
-   *
-   *
-   * TODO: Add 'identity-pool' as an option
-   */
-  credentialsType?: 'service-account-key';
-
-  /**
    * Add Pulumi access token to GitHub secrets
-   * @default true
+   * @default false
    */
   addPulumiAccessToken?: boolean;
 
@@ -67,8 +64,7 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
       repositories = args.repository ? [args.repository] : [],
       projectAliases,
       owners = [],
-      credentialsType = 'service-account-key',
-      addPulumiAccessToken = true,
+      addPulumiAccessToken = false,
       serviceAccountRole = 'roles/owner',
       billingAccount = defaultBillingAccount,
     } = args;
@@ -103,9 +99,11 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
     this.serviceAccount = new gcp.serviceaccount.Account(
       name,
       {
-        accountId: 'deploy',
+        accountId: interpolate`${name}-deployer`,
+        displayName: interpolate`${this.project.projectId} Service Account`,
+        description: interpolate`GitHub Action access to ${this.project.projectId}`,
       },
-      { provider: this.googleProvider, parent: this },
+      { provider: coreProvider, parent: this },
     );
 
     if (serviceAccountRole) {
@@ -142,18 +140,34 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
       ),
     );
 
-    if (credentialsType === 'service-account-key') {
-      this.credentials = new GitHubGCPServiceAccountKeyCredentials(
-        name,
+    repositories.map((repository) => {
+      const owner = pulumi.output(repository).apply(async (name) => {
+        const repo = await github.getRepository(
+          {
+            name,
+          },
+          { parent: this },
+        );
+
+        const fullName = repo.fullName;
+        if (!fullName) {
+          throw new Error(`Could not find repository ${name}`);
+        }
+
+        return fullName.split('/')[0];
+      });
+
+      return new IdentityPoolGithubSetup(
+        `${repository}-${name}-gh-identity-pool`,
         {
-          repositories,
+          repo: repository,
+          owner,
+          serviceAccountId: this.serviceAccount.id,
           projectId: this.project.projectId,
-          owners,
-          serviceAccount: this.serviceAccount,
         },
-        { providers: [this.googleProvider], parent: this },
+        { parent: this },
       );
-    }
+    });
 
     if (addPulumiAccessToken) {
       repositories.map(

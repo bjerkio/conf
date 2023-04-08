@@ -8,7 +8,7 @@ const config = new pulumi.Config('flexisoft');
 export const setup = new ProjectOnGithub(
   'flexisoft',
   {
-    projectName: 'flexisoft-portal',
+    projectName: 'flexisoft-app',
     folderId: folder.id,
     repository: 'conf',
     billingAccount: '0139CF-0C97EA-F3F6D9',

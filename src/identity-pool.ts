@@ -28,7 +28,10 @@ export const identityPoolProvider = new gcp.iam.WorkloadIdentityPoolProvider(
   { provider },
 );
 
-export const getIdentityPoolMember = (owner: string, repo: string) =>
+export const getIdentityPoolMember = (
+  owner: pulumi.Input<string>,
+  repo: pulumi.Input<string>,
+) =>
   pulumi.interpolate`principalSet://iam.googleapis.com/${identityPool.name}/attribute.repository/${owner}/${repo}`;
 
 export class GithubIdentityPoolIamMember extends pulumi.ComponentResource {
@@ -37,8 +40,8 @@ export class GithubIdentityPoolIamMember extends pulumi.ComponentResource {
   constructor(
     name: string,
     args: {
-      owner: string;
-      repo: string;
+      owner: pulumi.Input<string>;
+      repo: pulumi.Input<string>;
       serviceAccountId: pulumi.Input<string>;
     },
     opts?: pulumi.ComponentResourceOptions,
@@ -53,7 +56,7 @@ export class GithubIdentityPoolIamMember extends pulumi.ComponentResource {
         role: 'roles/iam.workloadIdentityUser',
         member: getIdentityPoolMember(args.owner, args.repo),
       },
-      { provider, deleteBeforeReplace: true },
+      { parent: this, provider, deleteBeforeReplace: true },
     );
 
     new gcp.serviceaccount.IAMMember(
@@ -63,7 +66,7 @@ export class GithubIdentityPoolIamMember extends pulumi.ComponentResource {
         role: 'roles/iam.serviceAccountTokenCreator',
         member: getIdentityPoolMember(args.owner, args.repo),
       },
-      { provider, deleteBeforeReplace: true },
+      { parent: this, provider, deleteBeforeReplace: true },
     );
   }
 }

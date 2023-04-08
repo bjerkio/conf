@@ -1,5 +1,3 @@
-import * as pulumi from '@pulumi/pulumi';
-import * as gcp from '@pulumi/gcp';
 import { ProjectOnGithub } from '../components/projects-on-github';
 import { folder } from './folder';
 import { bjerkio } from '../github-orgs';

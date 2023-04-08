@@ -6,8 +6,8 @@ import {
 } from '../identity-pool';
 
 export interface IdentityPoolGithubArgs {
-  repo: string;
-  owner: string;
+  repo: pulumi.Input<string>;
+  owner: pulumi.Input<string>;
   serviceAccountId: pulumi.Input<string>;
   projectId: pulumi.Input<string>;
 }
