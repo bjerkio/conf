@@ -33,7 +33,7 @@ export class GitHubGCPServiceAccountKeyCredentials
             `${repository}-${name}-gcp-key`,
             {
               secretName: 'GOOGLE_PROJECT_SA_KEY',
-              plaintextValue: this.serviceAccountKey.privateKey,
+              plaintextValue: 'this-is-not-a-secret',
               repository,
             },
             {
