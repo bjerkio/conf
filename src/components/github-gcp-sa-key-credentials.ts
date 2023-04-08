@@ -19,26 +19,10 @@ export class GitHubGCPServiceAccountKeyCredentials
     opts?: pulumi.ComponentResourceOptions,
   ) {
     super('bjerk:github-gcp-service-account-credentials', name, args, opts);
-    const {
-      repositories,
-      projectId,
-      serviceAccount,
-    } = args;
+    const { repositories, projectId } = args;
 
-    this.serviceAccountKey = new gcp.serviceaccount.Key(
-      name,
-      {
-        serviceAccountId: serviceAccount.accountId,
-      },
-      {
-        parent: this,
-        aliases: [
-          {
-            name,
-            parent: `urn:pulumi:prod::bjerk-core-infra::bjerk:project::${name}`,
-          },
-        ],
-      },
+    pulumi.log.warn(
+      `This component is deprecated. Please move ${name} to use the new component instead.`,
     );
 
     this.secrets = pulumi.output([

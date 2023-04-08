@@ -31,5 +31,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BJERKBOT_GITHUB_TOKEN }}
         with:
           command: up
-          refresh: true
           stack-name: bjerk/prod
