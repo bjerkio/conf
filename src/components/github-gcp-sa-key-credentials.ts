@@ -26,27 +26,6 @@ export class GitHubGCPServiceAccountKeyCredentials
     );
 
     this.secrets = pulumi.output([
-      // GCP Project access
-      ...repositories.map(
-        (repository) =>
-          new github.ActionsSecret(
-            `${repository}-${name}-gcp-key`,
-            {
-              secretName: 'GOOGLE_PROJECT_SA_KEY',
-              plaintextValue: 'this-is-not-a-secret',
-              repository,
-            },
-            {
-              parent: this,
-              aliases: [
-                {
-                  name: `${repository}-${name}-gcp-key`,
-                  parent: `urn:pulumi:prod::bjerk-core-infra::bjerk:project::${name}`,
-                },
-              ],
-            },
-          ),
-      ),
       // Google project ID
       ...repositories.map(
         (repository) =>
