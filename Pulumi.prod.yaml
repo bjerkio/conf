@@ -12,6 +12,8 @@ config:
   github:token:
     secure: AAABAFV2iNVa8uYxniCjg8903NVjQG4b9K6N4gcPlraAaszUTxUmkcft/IQm0j2NeqbTBGWH2Ei7xrtPpShS2hwaHHGE12rz
   intg-avfnor:slack-channel: C03KE9E4QEQ
+  pulumi:token:
+    secure: AAABALfUIspDSD6BHc//gBuigJQpEPekvfyM5HhY3UZdRov/qkl2Jams+B4BQmmaPUZeO4qWiyk/2ymYEiIOTmYvidWSLKKqM4ioUg==
   slack-tripletex-agent:slack-channel: C03FB4MH45U
   slack:bot-oauth-token:
     secure: AAABACso/J1kubbcGhP+wXpkXP679ghov0QEtzLfC6TjCValRouR8HuYCzrh/BHCA/4XUnngIOIiiIkEsV6sQk8t02uznm1kC64=

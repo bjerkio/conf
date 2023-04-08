@@ -163,6 +163,7 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
           repo: repository,
           owner,
           serviceAccountId: this.serviceAccount.id,
+          serviceAccountEmail: this.serviceAccount.email,
           projectId: this.project.projectId,
         },
         { parent: this },

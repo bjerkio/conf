@@ -1,9 +1,5 @@
-import * as pulumi from '@pulumi/pulumi';
 import * as github from '@pulumi/github';
-
-const config = new pulumi.Config('github');
-
-const token = config.requireSecret('token');
+import { githubToken as token } from './config';
 
 export const bjerkio = new github.Provider(`bjerkio-provider`, {
   owner: 'bjerkio',

@@ -14,6 +14,7 @@ export const setup = new ProjectOnGithub(
     billingAccount: '0139CF-0C97EA-F3F6D9',
     // TODO: Restrict access
     owners: config.requireObject<string[]>('owners'),
+    addPulumiAccessToken: true,
   },
   { providers: [flexiSoft] },
 );

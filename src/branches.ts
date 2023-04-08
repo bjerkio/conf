@@ -33,6 +33,7 @@ new IdentityPoolGithubSetup(
     repo: 'conf',
     owner: 'getbranches',
     serviceAccountId: serviceAccount.id,
+    serviceAccountEmail: serviceAccount.email,
     projectId: coreProject,
   },
   { providers: [coreGoogleProvider, branches] },

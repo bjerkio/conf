@@ -9,6 +9,7 @@ export interface IdentityPoolGithubArgs {
   repo: pulumi.Input<string>;
   owner: pulumi.Input<string>;
   serviceAccountId: pulumi.Input<string>;
+  serviceAccountEmail: pulumi.Input<string>;
   projectId: pulumi.Input<string>;
 }
 
@@ -19,7 +20,13 @@ export class IdentityPoolGithubSetup extends pulumi.ComponentResource {
     opts?: pulumi.ComponentResourceOptions,
   ) {
     super('bjerkio:github:IdentityPoolGithub', name, args, opts);
-    const { repo, owner, serviceAccountId, projectId } = args;
+    const {
+      repo,
+      owner,
+      serviceAccountId,
+      serviceAccountEmail,
+      projectId,
+    } = args;
 
     new GithubIdentityPoolIamMember(
       name,
@@ -33,6 +40,16 @@ export class IdentityPoolGithubSetup extends pulumi.ComponentResource {
         repository: repo,
         secretName: 'GOOGLE_PROJECT_ID',
         plaintextValue: projectId,
+      },
+      { parent: this, deleteBeforeReplace: true },
+    );
+
+    new github.ActionsSecret(
+      `${name}-google-service-accuont`,
+      {
+        repository: repo,
+        secretName: 'GOOGLE_SERVICE_ACCOUNT',
+        plaintextValue: serviceAccountEmail,
       },
       { parent: this, deleteBeforeReplace: true },
     );
