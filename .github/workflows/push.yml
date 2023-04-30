@@ -6,8 +6,17 @@ on:
 
 jobs:
   apply-changes:
-    name: Apply changes
+    name: Apply changes (${{ matrix.project }} @ ${{ matrix.stack-name }})
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - project: core-infra
+            stack-name: bjerk/conf
+          - project: bjerk-io
+            stack-name: bjerk/conf
+
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -38,4 +47,5 @@ jobs:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
         with:
           command: up
-          stack-name: bjerk/prod
+          stack-name: ${{ matrix.stack-name }}
+          workdir: projects/${{ matrix.project }}

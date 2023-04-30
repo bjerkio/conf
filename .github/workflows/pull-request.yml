@@ -4,8 +4,16 @@ on:
 
 jobs:
   preview-changes:
-    name: Preview changes
+    name: Preview changes (${{ matrix.project }} @ ${{ matrix.stack-name }})
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - project: core-infra
+            stack-name: bjerk/conf
+          - project: bjerk-io
+            stack-name: bjerk/conf
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -37,6 +45,7 @@ jobs:
         with:
           command: preview
           refresh: true
-          stack-name: bjerk/prod
+          stack-name: ${{ matrix.stack-name }}
+          workdir: projects/${{ matrix.project }}
           comment-on-pr: true
           github-token: ${{ secrets.BJERKBOT_GITHUB_TOKEN }}
