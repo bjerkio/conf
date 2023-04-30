@@ -1,0 +1,12 @@
+{
+  "name": "@bjerk/bjerk-io-infra",
+  "version": "0.1.0",
+  "repository": "github:bjerkio/conf",
+  "license": "Apache-2.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@pulumi/gcp": "^5.2.0",
+    "@pulumi/github": "^4.0.0",
+    "@pulumi/pulumi": "^3.2.1"
+  }
+}

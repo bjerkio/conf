@@ -30,7 +30,7 @@ export class ProjectSlackLogger extends pulumi.ComponentResource {
       name,
       {
         region: 'europe-west1',
-        runtime: 'nodejs14',
+        runtime: 'nodejs18',
         serviceAccountEmail: serviceAccount.email,
         environmentVariables: {
           SLACK_TOKEN: config.requireSecret('bot-oauth-token'),
