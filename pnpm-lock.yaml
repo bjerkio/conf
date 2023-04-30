@@ -29,8 +29,8 @@ importers:
   stack/bjerk-io:
     dependencies:
       '@pulumi/gcp':
-        specifier: ^5.2.0
-        version: 5.2.0
+        specifier: ^6.55.0
+        version: 6.55.0
       '@pulumi/github':
         specifier: ^4.0.0
         version: 4.0.0
@@ -435,17 +435,6 @@ packages:
 
   /@protobufjs/utf8@1.1.0:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
-    dev: false
-
-  /@pulumi/gcp@5.2.0:
-    resolution: {integrity: sha512-NDGPecXKJOyiu0kIA98FmkCb/HWtJf1YGtj6jTtme75TVVdvbGO1OYjCPsR2B+i2aZ1jccU0w9jc/rMsg0h18A==}
-    requiresBuild: true
-    dependencies:
-      '@pulumi/pulumi': 3.65.1
-      '@types/express': 4.17.17
-      read-package-json: 2.1.2
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@pulumi/gcp@6.55.0:
