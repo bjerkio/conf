@@ -22,10 +22,9 @@ roles in the organization to make it easier to manage.
 
 To retrieve access to projects, IAM roles should be explicitly granted on the
 project level. When giving everyone in the company access, the
-`developers@bjerk.io` can be used, this should be avoided when possible, and
-when used should be given the least amount of privileges possible (e.g.
-`roles/viewer`).
+`developers@bjerk.io` can be used, and when used should be given the least
+amount of privileges possible (e.g. `roles/viewer`).
 
 **Note**: These roles are not automatically granted to the groups, they are
 managed manually by administrators. Groups are also managed manually by
-administrators.
+administrators, only given access to users with protected accounts.
