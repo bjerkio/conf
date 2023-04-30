@@ -1,8 +1,13 @@
 name: Drift check
+
 on:
   schedule:
     # Run every day at 12 PM Europe/Oslo time
     - cron: '0 12 * * *'
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   check-for-changes:
@@ -13,9 +18,9 @@ jobs:
       matrix:
         include:
           - project: core-infra
-            stack-name: bjerk/conf
+            stack-name: bjerk/prod
           - project: bjerk-io
-            stack-name: bjerk/conf
+            stack-name: bjerk/prod
 
     steps:
       - name: Checkout 🛎️

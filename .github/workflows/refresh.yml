@@ -1,7 +1,12 @@
 name: Manual refresh
+
 on:
   repository_dispatch:
   workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   refresh:
@@ -12,9 +17,9 @@ jobs:
       matrix:
         include:
           - project: core-infra
-            stack-name: bjerk/conf
+            stack-name: bjerk/prod
           - project: bjerk-io
-            stack-name: bjerk/conf
+            stack-name: bjerk/prod
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3

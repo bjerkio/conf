@@ -1,8 +1,13 @@
 name: Push
+
 on:
   push:
     branches:
       - main
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   apply-changes:
@@ -13,9 +18,9 @@ jobs:
       matrix:
         include:
           - project: core-infra
-            stack-name: bjerk/conf
+            stack-name: bjerk/prod
           - project: bjerk-io
-            stack-name: bjerk/conf
+            stack-name: bjerk/prod
 
     steps:
       - name: Checkout 🛎️
