@@ -3,18 +3,11 @@
   "version": "0.1.0",
   "repository": "github:bjerkio/conf",
   "license": "Apache-2.0",
-  "main": "src/index.ts",
   "packageManager": "pnpm@8.3.1",
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint --ext .ts ."
-  },
-  "dependencies": {
-    "@pulumi/gcp": "^6.55.0",
-    "@pulumi/github": "^5.8.0",
-    "@pulumi/pulumi": "^3.65.1",
-    "gcl-slack": "^3.0.0"
   },
   "eslintConfig": {
     "extends": [

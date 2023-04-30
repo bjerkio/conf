@@ -1,0 +1,18 @@
+{
+  "name": "@bjerk/core-infra",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@pulumi/gcp": "^6.55.0",
+    "@pulumi/github": "^5.8.0",
+    "@pulumi/pulumi": "^3.65.1",
+    "gcl-slack": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.3"
+  },
+  "engines": {
+    "node": "^18"
+  }
+}
