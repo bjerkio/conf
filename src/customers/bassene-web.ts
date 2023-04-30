@@ -1,6 +1,6 @@
 import { ProjectOnGithub } from '../components/projects-on-github';
-import { folder } from './folder';
 import { basssene } from '../github-orgs';
+import { folder } from './folder';
 
 export const setup = new ProjectOnGithub(
   'bassene-web',
@@ -11,4 +11,3 @@ export const setup = new ProjectOnGithub(
   },
   { providers: [basssene] },
 );
-

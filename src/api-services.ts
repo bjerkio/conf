@@ -24,7 +24,7 @@ export const services = [
 ];
 
 export const apiServices = services.map(
-  (service) =>
+  service =>
     new gcp.projects.Service(service, {
       service,
       disableOnDestroy: false,

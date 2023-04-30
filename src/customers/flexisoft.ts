@@ -1,7 +1,7 @@
 import * as pulumi from '@pulumi/pulumi';
 import { ProjectOnGithub } from '../components/projects-on-github';
-import { folder } from './folder';
 import { flexiSoft } from '../github-orgs';
+import { folder } from './folder';
 
 const config = new pulumi.Config('flexisoft');
 

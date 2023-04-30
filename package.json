@@ -1,28 +1,40 @@
 {
-  "name": "@bjerk/infra-core",
+  "name": "@bjerk/conf",
   "version": "0.1.0",
-  "repository": "github:bjerkio/infra-core",
+  "repository": "github:bjerkio/conf",
   "license": "Apache-2.0",
   "main": "src/index.ts",
-  "dependencies": {
-    "@pulumi/gcp": "^5.0.0",
-    "@pulumi/github": "^4.0.0",
-    "@pulumi/pulumi": "^3.1.0",
-    "gcl-slack": "^1.5.0"
+  "packageManager": "pnpm@8.3.1",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint --ext .ts ."
   },
+  "dependencies": {
+    "@pulumi/gcp": "^6.55.0",
+    "@pulumi/github": "^5.8.0",
+    "@pulumi/pulumi": "^3.65.1",
+    "gcl-slack": "^3.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@bjerk/eslint-config"
+    ],
+    "rules": {
+      "import/no-unassigned-import": "off"
+    }
+  },
+  "prettier": "@cobraz/prettier",
   "devDependencies": {
-    "@types/node": "^14.14.41",
-    "@typescript-eslint/eslint-plugin": "~4.22.0",
-    "@typescript-eslint/parser": "~4.22.0",
-    "eslint": "~7.25.0",
-    "eslint-config-prettier": "~8.3.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "~24.3.5",
-    "husky": "^6.0.0",
-    "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1"
+    "@bjerk/eslint-config": "^4.0.0",
+    "@cobraz/prettier": "^2.0.1",
+    "@types/node": "^18.16.3",
+    "eslint": "^8.39.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8"
   },
   "engines": {
-    "node": "^16"
+    "node": "^18"
   }
 }

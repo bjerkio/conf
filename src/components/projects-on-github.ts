@@ -1,15 +1,14 @@
+import * as gcp from '@pulumi/gcp';
+import * as github from '@pulumi/github';
 import * as pulumi from '@pulumi/pulumi';
+import { interpolate } from '@pulumi/pulumi';
 import {
   billingAccount as defaultBillingAccount,
   pulumiAccessToken,
 } from '../config';
-import * as gcp from '@pulumi/gcp';
-import * as github from '@pulumi/github';
-import { invariant } from '../utils';
-import { GCPCredentials } from './gcp-credentials-interface';
-import { interpolate } from '@pulumi/pulumi';
-import { IdentityPoolGithubSetup } from './identity-pool-github';
 import { provider as coreProvider } from '../providers/core-google';
+import { invariant } from '../utils';
+import { IdentityPoolGithubSetup } from './identity-pool-github';
 
 export interface ProjectOnGithubSpec {
   projectName?: pulumi.Input<string>;
@@ -41,9 +40,6 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
 
   // Google Provider
   readonly googleProvider: gcp.Provider;
-
-  // Credentials
-  readonly credentials: GCPCredentials;
 
   readonly serviceAccount: gcp.serviceaccount.Account;
 
@@ -81,8 +77,8 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
           {
             autoCreateNetwork: true,
             billingAccount,
-            name: pulumi.output(projectName).apply((p) => p || ''),
-            projectId: pulumi.output(projectName).apply((p) => p || ''),
+            name: pulumi.output(projectName).apply(p => p || ''),
+            projectId: pulumi.output(projectName).apply(p => p || ''),
             folderId,
           },
           { protect: true, parent: this, aliases: projectAliases },
@@ -112,6 +108,7 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
         {
           member: pulumi.interpolate`serviceAccount:${this.serviceAccount.email}`,
           role: serviceAccountRole,
+          project: this.project.projectId,
         },
         {
           parent: this,
@@ -126,22 +123,23 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
       );
     }
 
-    this.roles = pulumi.all(owners).apply((owners) =>
+    this.roles = pulumi.all(owners).apply(owners =>
       owners.map(
-        (member) =>
+        member =>
           new gcp.projects.IAMMember(
             `${name}-owner-${member}`,
             {
               member,
               role: 'roles/owner',
+              project: this.project.projectId,
             },
             { provider: this.googleProvider, parent: this },
           ),
       ),
     );
 
-    repositories.map((repository) => {
-      const owner = pulumi.output(repository).apply(async (name) => {
+    repositories.map(repository => {
+      const owner = pulumi.output(repository).apply(async name => {
         const repo = await github.getRepository(
           {
             name,
@@ -172,12 +170,12 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
 
     if (addPulumiAccessToken) {
       repositories.map(
-        (repository) =>
+        repository =>
           new github.ActionsSecret(
             `${repository}-${name}-pulumi`,
             {
               secretName: 'PULUMI_ACCESS_TOKEN',
-              plaintextValue: pulumiAccessToken.apply((t) => t || ''),
+              plaintextValue: pulumiAccessToken.apply(t => t || ''),
               repository,
             },
             { parent: this },

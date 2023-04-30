@@ -31,7 +31,7 @@ export const identityPoolProvider = new gcp.iam.WorkloadIdentityPoolProvider(
 export const getIdentityPoolMember = (
   owner: pulumi.Input<string>,
   repo: pulumi.Input<string>,
-) =>
+): pulumi.Output<string> =>
   pulumi.interpolate`principalSet://iam.googleapis.com/${identityPool.name}/attribute.repository/${owner}/${repo}`;
 
 export class GithubIdentityPoolIamMember extends pulumi.ComponentResource {

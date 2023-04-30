@@ -8,9 +8,9 @@ new gcp.organizations.Project('veltno', {
   projectId: 'veltno',
 });
 
-new gcp.organizations.Project("tomba-domains", {
-    autoCreateNetwork: true,
-    billingAccount,
-    name: "tomba-domains",
-    projectId: "tomba-domains",
+new gcp.organizations.Project('tomba-domains', {
+  autoCreateNetwork: true,
+  billingAccount,
+  name: 'tomba-domains',
+  projectId: 'tomba-domains',
 });

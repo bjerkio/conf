@@ -7,7 +7,7 @@ export const folder = new gcp.organizations.Folder('customer-folder', {
 });
 
 export const viewerUsers = developers.map(
-  (member) =>
+  member =>
     new gcp.folder.IAMMember(`${member}-developer-viewer`, {
       folder: folder.name,
       role: 'roles/viewer',

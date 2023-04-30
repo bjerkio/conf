@@ -1,7 +1,7 @@
 import * as gcp from '@pulumi/gcp';
 import { ProjectOnGithub } from '../components/projects-on-github';
-import { folder } from './folder';
 import { bjerkio } from '../github-orgs';
+import { folder } from './folder';
 
 export const setup = new ProjectOnGithub(
   'bjerk-gaming',
@@ -37,7 +37,7 @@ export const services = [
 ];
 
 export const apiServices = services.map(
-  (service) =>
+  service =>
     new gcp.projects.Service(`bjerk-gaming-${service}`, {
       service,
       disableOnDestroy: false,

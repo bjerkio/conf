@@ -9,7 +9,11 @@ export interface ProjectSlackLoggerArgs {
 }
 
 export class ProjectSlackLogger extends pulumi.ComponentResource {
-  constructor(name: string, args: ProjectSlackLoggerArgs, opts?: pulumi.ComponentResourceOptions) {
+  constructor(
+    name: string,
+    args: ProjectSlackLoggerArgs,
+    opts?: pulumi.ComponentResourceOptions,
+  ) {
     super('bjerk:project-slack-logger', name, args, opts);
 
     const topic = new gcp.pubsub.Topic(name, {}, { parent: this });

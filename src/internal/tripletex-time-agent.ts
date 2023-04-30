@@ -1,10 +1,9 @@
-import * as pulumi from '@pulumi/pulumi';
 import * as gcp from '@pulumi/gcp';
+import { Config } from '@pulumi/pulumi';
 import { ProjectOnGithub } from '../components/projects-on-github';
-import { folder } from './folder';
 import { bjerkio } from '../github-orgs';
 import { ProjectSlackLogger } from '../slack-logger';
-import { Config } from '@pulumi/pulumi';
+import { folder } from './folder';
 
 const config = new Config('tripletex-time-agent');
 
@@ -42,7 +41,7 @@ export const services = [
 ];
 
 export const apiServices = services.map(
-  (service) =>
+  service =>
     new gcp.projects.Service(
       `tta-${service}`,
       {

@@ -1,6 +1,6 @@
 import { ProjectOnGithub } from '../components/projects-on-github';
-import { folder } from './folder';
 import { bjerkio } from '../github-orgs';
+import { folder } from './folder';
 
 export const setup = new ProjectOnGithub(
   'bjerk-io',

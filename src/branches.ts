@@ -1,4 +1,5 @@
 import * as gcp from '@pulumi/gcp';
+import { interpolate } from '@pulumi/pulumi';
 import { IdentityPoolGithubSetup } from './components/identity-pool-github';
 import {
   billingAccount,
@@ -6,9 +7,8 @@ import {
   coreProject,
   organizationNumber,
 } from './config';
-import { provider as coreGoogleProvider } from './providers/core-google';
-import { interpolate } from '@pulumi/pulumi';
 import { branches } from './github-orgs';
+import { provider as coreGoogleProvider } from './providers/core-google';
 
 export const folder = new gcp.organizations.Folder(
   'branches-folder',
@@ -60,7 +60,7 @@ new gcp.billing.AccountIamMember(
 );
 
 branchesDevelopers.map(
-  (developer) =>
+  developer =>
     new gcp.serviceaccount.IAMMember(`${developer}-branches-impersonation`, {
       serviceAccountId: serviceAccount.id,
       role: 'roles/iam.serviceAccountTokenCreator',

@@ -1,5 +1,5 @@
-import * as pulumi from '@pulumi/pulumi';
 import * as github from '@pulumi/github';
+import * as pulumi from '@pulumi/pulumi';
 import {
   GithubIdentityPoolIamMember,
   identityPoolProvider,
@@ -20,13 +20,8 @@ export class IdentityPoolGithubSetup extends pulumi.ComponentResource {
     opts?: pulumi.ComponentResourceOptions,
   ) {
     super('bjerkio:github:IdentityPoolGithub', name, args, opts);
-    const {
-      repo,
-      owner,
-      serviceAccountId,
-      serviceAccountEmail,
-      projectId,
-    } = args;
+    const { repo, owner, serviceAccountId, serviceAccountEmail, projectId } =
+      args;
 
     new GithubIdentityPoolIamMember(
       name,

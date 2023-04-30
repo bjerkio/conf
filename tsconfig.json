@@ -15,7 +15,5 @@
     "forceConsistentCasingInFileNames": true,
     "strictNullChecks": true
   },
-  "files": [
-    "src/**/*.ts"
-  ]
+  "files": ["src/**/*.ts"]
 }
