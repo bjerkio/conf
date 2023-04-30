@@ -50,6 +50,6 @@ jobs:
           command: preview
           refresh: true
           stack-name: ${{ matrix.stack-name }}
-          workdir: projects/${{ matrix.project }}
+          work-dir: projects/${{ matrix.project }}
           comment-on-pr: true
           github-token: ${{ secrets.BJERKBOT_GITHUB_TOKEN }}

@@ -50,4 +50,4 @@ jobs:
         with:
           command: refresh
           stack-name: ${{ matrix.stack-name }}
-          workdir: projects/${{ matrix.project }}
+          work-dir: projects/${{ matrix.project }}

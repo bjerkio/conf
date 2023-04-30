@@ -53,7 +53,7 @@ jobs:
           command: preview
           refresh: true
           stack-name: ${{ matrix.stack-name }}
-          workdir: projects/${{ matrix.project }}
+          work-dir: projects/${{ matrix.project }}
           expect-no-changes: true
 
       - uses: wearerequired/slack-messaging-action@v2

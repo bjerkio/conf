@@ -52,4 +52,4 @@ jobs:
         with:
           command: up
           stack-name: ${{ matrix.stack-name }}
-          workdir: projects/${{ matrix.project }}
+          work-dir: projects/${{ matrix.project }}
