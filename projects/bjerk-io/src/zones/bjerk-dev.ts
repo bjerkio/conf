@@ -4,7 +4,7 @@ export const zone = new gcp.dns.ManagedZone(
   'bjerk-dev-zone',
   {
     name: 'bjerk-dev',
-    description: '',
+    description: 'Bjerks developer domain',
     dnsName: 'bjerk.dev.',
     dnssecConfig: { state: 'on' },
     forceDestroy: false,

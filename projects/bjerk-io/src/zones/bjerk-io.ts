@@ -4,7 +4,7 @@ export const zone = new gcp.dns.ManagedZone(
   'bjerk-io-zone',
   {
     name: 'bjerk-io',
-    description: '',
+    description: 'Bjerk primary domain',
     dnsName: 'bjerk.io.',
     forceDestroy: false,
     visibility: 'public',
