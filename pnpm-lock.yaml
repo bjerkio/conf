@@ -54,13 +54,13 @@ importers:
   projects/bjerk-io:
     dependencies:
       '@pulumi/gcp':
-        specifier: ^5.26.0
-        version: 5.26.0
+        specifier: ^6.55.0
+        version: 6.55.0
       '@pulumi/github':
-        specifier: ^4.17.0
-        version: 4.17.0
+        specifier: ^5.8.0
+        version: 5.8.0
       '@pulumi/pulumi':
-        specifier: ^3.65.1
+        specifier: ^3.2.1
         version: 3.65.1
 
   projects/core-infra:
@@ -492,17 +492,6 @@ packages:
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
     dev: false
 
-  /@pulumi/gcp@5.26.0:
-    resolution: {integrity: sha512-QTGYAazMBdHp2SxAING410kQC4i93NCO5e8PT+Hw9ES2LuIjOGX3EQxg4E1iG7Tn7OvTN4INZgETseMaqhFTeg==}
-    requiresBuild: true
-    dependencies:
-      '@pulumi/pulumi': 3.65.1
-      '@types/express': 4.17.17
-      read-package-json: 2.1.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /@pulumi/gcp@6.55.0:
     resolution: {integrity: sha512-7sFuRrOP6cUk3ibhjIwjtSxLq0DXyaHaZAf8Q6Nt/v3RpCABPTN4A2Qef4ag2lctBiEw+fwmqExl5bw35VTyPA==}
     requiresBuild: true
@@ -510,15 +499,6 @@ packages:
       '@pulumi/pulumi': 3.65.1
       '@types/express': 4.17.17
       read-package-json: 2.1.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /@pulumi/github@4.17.0:
-    resolution: {integrity: sha512-znl8MhArmDW1V0Ud3CWAORbTPzEgesKvxOxHMv+0UIeFWx8sGkWwFRNyRzWCUnxx/FxGEh9EzQ71pWqm4lvWTQ==}
-    requiresBuild: true
-    dependencies:
-      '@pulumi/pulumi': 3.65.1
     transitivePeerDependencies:
       - supports-color
     dev: false
