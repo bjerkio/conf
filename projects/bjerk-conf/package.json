@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "Apache-2.0",
   "scripts": {
-    "update-github-token": "rotate-pulumi-secret github --stack Bjerk/prod --work-dir ./"
+    "update-github-token": "rotate-pulumi-secret github --stack Bjerk/prod --type github-classic --work-dir ./"
   },
   "dependencies": {
     "@pulumi/gcp": "^6.55.0",
