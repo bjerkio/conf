@@ -1,6 +1,6 @@
 import * as github from '@pulumi/github';
-import { githubToken } from '../config';
+import { gitHubToken } from '../stack-refs';
 
 export const provider = new github.Provider('github-provider', {
-  token: githubToken,
+  token: gitHubToken,
 });

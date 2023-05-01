@@ -18,6 +18,6 @@ export const setup = new ProjectOnGithub(
 
 new ProjectSlackLogger(
   'timely-agent',
-  { channel: config.require('slack-channel') },
+  { channel: config.require('slack-channel'), projectId: setup.project.projectId },
   { provider: setup.googleProvider },
 );

@@ -15,6 +15,7 @@ config:
   pulumi:token:
     secure: AAABALfUIspDSD6BHc//gBuigJQpEPekvfyM5HhY3UZdRov/qkl2Jams+B4BQmmaPUZeO4qWiyk/2ymYEiIOTmYvidWSLKKqM4ioUg==
   slack-tripletex-agent:slack-channel: C03FB4MH45U
+  slack:google-cloud-logger-slack-tag: latest
   slack:bot-oauth-token:
     secure: AAABACso/J1kubbcGhP+wXpkXP679ghov0QEtzLfC6TjCValRouR8HuYCzrh/BHCA/4XUnngIOIiiIkEsV6sQk8t02uznm1kC64=
   timely-agent:slack-channel: C03BY6RB248

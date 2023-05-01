@@ -1,12 +1,14 @@
 import * as gcp from '@pulumi/gcp';
 import * as pulumi from '@pulumi/pulumi';
-import { makePulumiCallback } from 'gcl-slack';
 
 const config = new pulumi.Config('slack');
 
 export interface ProjectSlackLoggerArgs {
   channel: string;
+  projectId: pulumi.Input<string>;
 }
+
+const slackAgentTag = config.require('google-cloud-logger-slack-tag');
 
 export class ProjectSlackLogger extends pulumi.ComponentResource {
   constructor(
@@ -26,21 +28,82 @@ export class ProjectSlackLogger extends pulumi.ComponentResource {
       { parent: this },
     );
 
-    topic.onMessagePublished(
+    const service = new gcp.cloudrunv2.Service(
       name,
       {
-        region: 'europe-west1',
-        runtime: 'nodejs18',
-        serviceAccountEmail: serviceAccount.email,
-        environmentVariables: {
-          SLACK_TOKEN: config.requireSecret('bot-oauth-token'),
-          DEFAULT_SLACK_CHANNEL: args.channel,
+        name: `slack-logger-${name}`,
+        location: 'europe-west1',
+        description: `Slack logger – ${name}`,
+        template: {
+          serviceAccount: serviceAccount.email,
+          containers: [
+            {
+              image: `docker.io/bjerkbot/google-cloud-logger-slack:${slackAgentTag}`,
+              envs: [
+                {
+                  name: 'SLACK_TOKEN',
+                  value: config.requireSecret('bot-oauth-token'),
+                },
+                {
+                  name: 'DEFAULT_CHANNEL',
+                  value: args.channel,
+                },
+              ],
+            },
+          ],
         },
-        callback: makePulumiCallback('api', {
-          apiOptions: { defaultChannel: args.channel },
-        }),
       },
-      {},
+      { parent: this },
+    );
+
+    new gcp.eventarc.Trigger(
+      name,
+      {
+        location: 'europe-west1',
+        transports: [
+          {
+            pubsubs: [
+              {
+                topic: topic.name,
+              },
+            ],
+          },
+        ],
+        matchingCriterias: [
+          {
+            attribute: 'type',
+            value: 'google.cloud.pubsub.topic.v1.messagePublished',
+          },
+        ],
+        serviceAccount: serviceAccount.email,
+        destination: {
+          cloudRunService: {
+            service: service.name,
+            region: 'europe-west1',
+          },
+        },
+      },
+      { parent: this },
+    );
+
+    new gcp.projects.IAMMember(
+      name,
+      {
+        project: args.projectId,
+        role: 'roles/eventarc.eventReceiver',
+        member: pulumi.interpolate`serviceAccount:${serviceAccount.email}`,
+      },
+      { parent: this },
+    );
+
+    new gcp.cloudrunv2.ServiceIamMember(
+      name,
+      {
+        name: service.name,
+        location: 'europe-west1',
+        role: 'roles/run.invoker',
+        member: pulumi.interpolate`serviceAccount:${serviceAccount.email}`,
+      },
       { parent: this },
     );
 

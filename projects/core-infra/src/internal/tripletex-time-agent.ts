@@ -38,6 +38,7 @@ export const services = [
   'cloudbuild.googleapis.com',
   'iam.googleapis.com',
   'cloudbilling.googleapis.com',
+  'eventarc.googleapis.com',
 ];
 
 export const apiServices = services.map(
@@ -55,6 +56,9 @@ export const apiServices = services.map(
 
 new ProjectSlackLogger(
   'tripletex-time-agent',
-  { channel: config.require('slack-channel') },
+  {
+    channel: config.require('slack-channel'),
+    projectId: setup.project.projectId,
+  },
   { provider: setup.googleProvider, dependsOn: apiServices },
 );

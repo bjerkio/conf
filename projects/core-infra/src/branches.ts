@@ -49,16 +49,6 @@ new gcp.folder.IAMMember(
   { provider: coreGoogleProvider },
 );
 
-new gcp.billing.AccountIamMember(
-  'branches-billing-account-user',
-  {
-    billingAccountId: billingAccount,
-    role: 'roles/billing.user',
-    member: interpolate`serviceAccount:${serviceAccount.email}`,
-  },
-  { provider: coreGoogleProvider },
-);
-
 branchesDevelopers.map(
   developer =>
     new gcp.serviceaccount.IAMMember(`${developer}-branches-impersonation`, {

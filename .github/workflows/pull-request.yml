@@ -1,6 +1,11 @@
-name: Pull Request
+name: PR
+
 on:
   pull_request:
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   preview-changes:
@@ -8,12 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         include:
           - project: core-infra
-            stack-name: bjerk/conf
+            stack-name: bjerk/prod
           - project: bjerk-io
-            stack-name: bjerk/conf
+            stack-name: bjerk/prod
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -32,7 +38,7 @@ jobs:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
 
-      - uses: cobraz/setup-gke-gcloud-auth-plugin@v1
+      - uses: simenandre/setup-gke-gcloud-auth-plugin@v1
 
       - name: Install dependencies 📦️
         run: pnpm install --frozen-lockfile
@@ -45,6 +51,6 @@ jobs:
           command: preview
           refresh: true
           stack-name: ${{ matrix.stack-name }}
-          workdir: projects/${{ matrix.project }}
+          work-dir: projects/${{ matrix.project }}
           comment-on-pr: true
           github-token: ${{ secrets.BJERKBOT_GITHUB_TOKEN }}
