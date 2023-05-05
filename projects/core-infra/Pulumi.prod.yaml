@@ -1,4 +1,6 @@
 config:
+  abax-vwfs:owners:
+    - group:developers@bjerk.io
   bjerk-core-infra:billingAccount:
     secure: AAABAEU/AT0YecFWCtiZTs5/idAfjuuY4dGFeS+l3onG8KZ3RBJcpO1bWpABu9mZrorP4w==
   bjerk-core-infra:developers:
@@ -15,8 +17,8 @@ config:
   pulumi:token:
     secure: AAABALfUIspDSD6BHc//gBuigJQpEPekvfyM5HhY3UZdRov/qkl2Jams+B4BQmmaPUZeO4qWiyk/2ymYEiIOTmYvidWSLKKqM4ioUg==
   slack-tripletex-agent:slack-channel: C03FB4MH45U
-  slack:google-cloud-logger-slack-tag: latest
   slack:bot-oauth-token:
     secure: AAABACso/J1kubbcGhP+wXpkXP679ghov0QEtzLfC6TjCValRouR8HuYCzrh/BHCA/4XUnngIOIiiIkEsV6sQk8t02uznm1kC64=
+  slack:google-cloud-logger-slack-tag: latest
   timely-agent:slack-channel: C03BY6RB248
   tripletex-time-agent:slack-channel: C03J6TVRVFG
