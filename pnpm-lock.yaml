@@ -74,6 +74,9 @@ importers:
       '@pulumi/pulumi':
         specifier: ^3.65.1
         version: 3.65.1
+      date-fns:
+        specifier: ^2.30.0
+        version: 2.30.0
       gcl-slack:
         specifier: ^3.0.0
         version: 3.0.0
