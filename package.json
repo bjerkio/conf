@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "repository": "github:bjerkio/conf",
   "license": "Apache-2.0",
-  "packageManager": "pnpm@8.4.0",
+  "packageManager": "pnpm@8.5.0",
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",
