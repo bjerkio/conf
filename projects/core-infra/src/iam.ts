@@ -3,9 +3,9 @@ import { developers, organizationNumber } from './config';
 
 developers.map(
   member =>
-    new gcp.organizations.IAMMember(`${member}-org-developer-folderViewer`, {
+    new gcp.organizations.IAMMember(`${member}-org-developer-browsers`, {
       orgId: String(organizationNumber),
-      role: 'roles/resourcemanager.folderViewer',
+      role: 'roles/browser',
       member,
     }),
 );
