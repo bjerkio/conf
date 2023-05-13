@@ -1,15 +1,16 @@
 import * as github from '@pulumi/github';
-import { github as config } from '../config';
 import { gitHubIdentityPoolProvider } from '../google/identity-pool';
 import { serviceAccount } from '../google/service-account';
 import { getGithubProvider } from './providers';
 
-const provider = getGithubProvider(config.owner);
+const owner = 'bjerkio';
+const repo = 'conf';
+const provider = getGithubProvider(owner);
 
 new github.ActionsSecret(
   'google-service-account',
   {
-    repository: config.repo,
+    repository: repo,
     secretName: 'GOOGLE_SERVICE_ACCOUNT',
     plaintextValue: serviceAccount.email,
   },
@@ -19,7 +20,7 @@ new github.ActionsSecret(
 new github.ActionsSecret(
   'google-identity-provider',
   {
-    repository: config.repo,
+    repository: repo,
     secretName: 'WORKLOAD_IDENTITY_PROVIDER',
     plaintextValue: gitHubIdentityPoolProvider.name,
   },
