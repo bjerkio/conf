@@ -6,11 +6,15 @@ export const folder = new gcp.organizations.Folder('customer-folder', {
   parent: `organizations/${organizationNumber}`,
 });
 
-export const viewerUsers = developers.map(
-  member =>
-    new gcp.folder.IAMMember(`${member}-developer-viewer`, {
-      folder: folder.name,
-      role: 'roles/viewer',
-      member,
-    }),
-);
+export const viewerUsers = developers.map(member => [
+  new gcp.folder.IAMMember(`${member}-developer-viewer`, {
+    folder: folder.name,
+    role: 'roles/viewer',
+    member,
+  }),
+  new gcp.folder.IAMMember(`${member}-developer-folderViewer`, {
+    folder: folder.name,
+    role: 'roles/resourcemanager.folderViewer',
+    member,
+  }),
+]);

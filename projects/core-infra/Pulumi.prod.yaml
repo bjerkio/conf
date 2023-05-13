@@ -5,6 +5,8 @@ config:
     secure: AAABAEU/AT0YecFWCtiZTs5/idAfjuuY4dGFeS+l3onG8KZ3RBJcpO1bWpABu9mZrorP4w==
   bjerk-core-infra:developers:
     - group:developers@bjerk.io
+  bjerk-core-infra:internal-viewers:
+    - group:gcp-organization-viewers@bjerk.io
   branches:developers:
     - group:developers@bjerk.io
   github:token:

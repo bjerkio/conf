@@ -13,3 +13,5 @@ export const branchesDevelopers =
   branchesConfig.requireObject<string[]>('developers');
 
 export const developers = config.requireObject<string[]>('developers');
+export const internalViewers =
+  config.requireObject<string[]>('internal-viewers');

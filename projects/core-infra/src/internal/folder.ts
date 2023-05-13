@@ -1,7 +1,20 @@
 import * as gcp from '@pulumi/gcp';
-import { organizationNumber } from '../config';
+import { internalViewers, organizationNumber } from '../config';
 
 export const folder = new gcp.organizations.Folder('internal-folder', {
   displayName: 'Internal',
   parent: `organizations/${organizationNumber}`,
 });
+
+export const viewerUsers = internalViewers.map(member => [
+  new gcp.folder.IAMMember(`${member}-developer-viewer`, {
+    folder: folder.name,
+    role: 'roles/viewer',
+    member,
+  }),
+  new gcp.folder.IAMMember(`${member}-developer-folderViewer`, {
+    folder: folder.name,
+    role: 'roles/resourcemanager.folderViewer',
+    member,
+  }),
+]);

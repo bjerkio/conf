@@ -54,11 +54,15 @@ new gcp.folder.IAMMember(
   { provider: coreGoogleProvider },
 );
 
-branchesDevelopers.map(
-  developer =>
-    new gcp.folder.IAMMember(`${developer}-viewer`, {
-      folder: folder.name,
-      role: 'roles/viewer',
-      member: developer,
-    }),
-);
+branchesDevelopers.map(developer => [
+  new gcp.folder.IAMMember(`${developer}-viewer`, {
+    folder: folder.name,
+    role: 'roles/viewer',
+    member: developer,
+  }),
+  new gcp.folder.IAMMember(`${developer}-folderViewer`, {
+    folder: folder.name,
+    role: 'roles/resourcemanager.folderViewer',
+    member: developer,
+  }),
+]);
