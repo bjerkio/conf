@@ -7,9 +7,9 @@ export const folder = new gcp.organizations.Folder('internal-folder', {
 });
 
 export const viewerUsers = internalViewers.map(member => [
-  new gcp.folder.IAMMember(`${member}-developer-viewer`, {
+  new gcp.folder.IAMMember(`${member}-internal-developer-browser`, {
     folder: folder.name,
-    role: 'roles/viewer',
+    role: 'roles/browser',
     member,
   }),
 ]);
