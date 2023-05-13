@@ -45,7 +45,7 @@ new gcp.folder.IAMMember(
 );
 
 new gcp.folder.IAMMember(
-  'branches-project-creator',
+  'branches-owner',
   {
     folder: folder.name,
     role: 'roles/owner',
