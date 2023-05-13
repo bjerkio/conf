@@ -1,5 +1,4 @@
 import './internal';
-import './foss';
 import './misc-projects';
 import './api-services';
 import './customers';
