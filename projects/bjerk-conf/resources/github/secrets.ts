@@ -2,7 +2,9 @@ import * as github from '@pulumi/github';
 import { github as config } from '../config';
 import { gitHubIdentityPoolProvider } from '../google/identity-pool';
 import { serviceAccount } from '../google/service-account';
-import { provider } from './provider';
+import { getGithubProvider } from './providers';
+
+const provider = getGithubProvider(config.owner);
 
 new github.ActionsSecret(
   'google-service-account',
