@@ -7,9 +7,6 @@ config:
     - group:developers@bjerk.io
   branches:developers:
     - group:developers@bjerk.io
-  flexisoft:owners:
-    - user:so@bjerk.io
-    - user:brage@bjerk.io
   github:token:
     secure: AAABAFV2iNVa8uYxniCjg8903NVjQG4b9K6N4gcPlraAaszUTxUmkcft/IQm0j2NeqbTBGWH2Ei7xrtPpShS2hwaHHGE12rz
   intg-avfnor:slack-channel: C03KE9E4QEQ
