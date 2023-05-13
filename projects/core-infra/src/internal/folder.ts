@@ -12,9 +12,4 @@ export const viewerUsers = internalViewers.map(member => [
     role: 'roles/viewer',
     member,
   }),
-  new gcp.folder.IAMMember(`${member}-developer-folderViewer`, {
-    folder: folder.name,
-    role: 'roles/resourcemanager.folderViewer',
-    member,
-  }),
 ]);
