@@ -56,9 +56,9 @@ new gcp.folder.IAMMember(
 
 branchesDevelopers.map(
   developer =>
-    new gcp.serviceaccount.IAMMember(`${developer}-branches-impersonation`, {
-      serviceAccountId: serviceAccount.id,
-      role: 'roles/iam.serviceAccountTokenCreator',
-      member: `user:${developer}`,
+    new gcp.folder.IAMMember(`${developer}-viewer`, {
+      folder: folder.name,
+      role: 'roles/viewer',
+      member: developer,
     }),
 );
