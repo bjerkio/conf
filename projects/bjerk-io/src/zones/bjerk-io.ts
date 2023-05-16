@@ -119,10 +119,10 @@ new gcp.dns.RecordSet(
 );
 
 new gcp.dns.RecordSet(
-  'bjerk-io-vault',
+  'bjerk-io-reporting',
   {
     managedZone,
-    name: 'vault.bjerk.io.',
+    name: 'reporting.bjerk.io.',
     rrdatas: ['34.88.68.230'],
     ttl,
     type: 'A',
