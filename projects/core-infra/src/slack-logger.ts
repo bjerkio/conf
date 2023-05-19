@@ -18,7 +18,9 @@ export class ProjectSlackLogger extends pulumi.ComponentResource {
   ) {
     super('bjerk:project-slack-logger', name, args, opts);
 
-    const topic = new gcp.pubsub.Topic(name, {}, { parent: this });
+    const topic = new gcp.pubsub.Topic(name, {
+      name,
+    }, { parent: this });
 
     const serviceAccount = new gcp.serviceaccount.Account(
       name,
@@ -100,7 +102,7 @@ export class ProjectSlackLogger extends pulumi.ComponentResource {
       name,
       {
         name: service.name,
-        location: 'europe-west1',
+        location: service.location.apply(location => location ? location : 'europe-west1'),
         role: 'roles/run.invoker',
         member: pulumi.interpolate`serviceAccount:${serviceAccount.email}`,
       },
