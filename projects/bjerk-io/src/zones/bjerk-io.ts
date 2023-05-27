@@ -141,3 +141,16 @@ new gcp.dns.RecordSet(
   },
   opts,
 );
+
+new gcp.dns.RecordSet(
+  'bjerk-io-studio',
+  {
+    managedZone,
+    name: 'studio.bjerk.io.',
+    rrdatas: ['bjerkio.github.io.'],
+    ttl,
+    type: 'CNAME',
+  },
+  opts,
+);
+
