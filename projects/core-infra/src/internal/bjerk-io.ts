@@ -25,3 +25,13 @@ developers.map((developer) => new gcp.projects.IAMMember(
   },
   { provider: setup.googleProvider },
 ));
+
+developers.map((developer) => new gcp.projects.IAMMember(
+  `bjerk-io-${developer}-firebase-viewer`,
+  {
+    member: developer,
+    role: 'roles/firebase.viewer',
+    project: setup.project.projectId,
+  },
+  { provider: setup.googleProvider },
+));
