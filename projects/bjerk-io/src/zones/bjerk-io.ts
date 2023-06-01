@@ -154,3 +154,15 @@ new gcp.dns.RecordSet(
   opts,
 );
 
+new gcp.dns.RecordSet(
+  'bjerk-io-gate',
+  {
+    managedZone,
+    name: 'gate.bjerk.io.',
+    rrdatas: ['bjerkio.github.io.'],
+    ttl,
+    type: 'CNAME',
+  },
+  opts,
+);
+
