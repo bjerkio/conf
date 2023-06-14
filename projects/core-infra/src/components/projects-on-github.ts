@@ -182,7 +182,7 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
               );
             }
 
-            if (isPast(expiresAt)) {
+            if (isPast(expiresAt as Date)) {
               pulumi.log.warn(
                 `Admin role ${role} expires in the past. This will not be applied.`,
               );
