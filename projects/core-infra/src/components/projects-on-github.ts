@@ -11,6 +11,7 @@ import { provider as coreProvider } from '../providers/core-google';
 import { invariant, notEmpty } from '../utils';
 import { IdentityPoolGithubSetup } from './identity-pool-github';
 
+// TODO: Wrap expiresAt with pulumi.Input
 interface ProjectRole {
   role: pulumi.Input<string>;
   member: pulumi.Input<string>;
@@ -18,7 +19,7 @@ interface ProjectRole {
   /**
    * Required for admin roles
    */
-  expiresAt?: pulumi.Input<Date>;
+  expiresAt?: Date;
 }
 
 // Google administrator roles
