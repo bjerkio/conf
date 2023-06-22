@@ -35,3 +35,13 @@ developers.map((developer) => new gcp.projects.IAMMember(
   },
   { provider: setup.googleProvider },
 ));
+
+developers.map((developer) => new gcp.projects.IAMMember(
+  `bjerk-io-${developer}-logging-viewer`,
+  {
+    member: developer,
+    role: 'roles/logging.viewer',
+    project: setup.project.projectId,
+  },
+  { provider: setup.googleProvider },
+));
