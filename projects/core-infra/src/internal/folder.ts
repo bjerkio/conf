@@ -12,4 +12,9 @@ export const viewerUsers = internalViewers.map(member => [
     role: 'roles/browser',
     member,
   }),
+  new gcp.folder.IAMMember(`${member}-internal-developer-logging-viewier`, {
+    folder: folder.name,
+    role: 'roles/logging.viewer',
+    member,
+  }),
 ]);
