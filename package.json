@@ -9,14 +9,6 @@
     "format:check": "prettier --check .",
     "lint": "eslint --ext .ts ."
   },
-  "eslintConfig": {
-    "extends": [
-      "@bjerk/eslint-config"
-    ],
-    "rules": {
-      "import/no-unassigned-import": "off"
-    }
-  },
   "prettier": "@simenandre/prettier",
   "devDependencies": {
     "@bjerk/eslint-config": "^4.0.0",
