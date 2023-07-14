@@ -4,6 +4,7 @@ on:
   schedule:
     # Run every day at 12 PM Europe/Oslo time
     - cron: '0 12 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -57,58 +58,16 @@ jobs:
           work-dir: projects/${{ matrix.project }}
           expect-no-changes: true
 
-      - uses: wearerequired/slack-messaging-action@v2
+      - uses: slackapi/slack-github-action@v1.23.0
         if: failure()
         with:
-          bot_token: ${{ secrets.SLACK_BOT_TOKEN }}
-          channel: bjerk-notifications
-          payload: >-
+          payload: |
             {
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Drift-check is *failing* on ${{
-            github.repository_owner }}/${{ github.repository }}"
-                  }
-                },
-                {
-                  "type": "divider"
-                },
-                {
-                  "type": "context",
-                  "elements": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "#*${{ github.run_number }}*"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "Status: *${{ job.status }}*"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "Job: *${{ github.workflow }}*"
-                    }
-                  ]
-                },
-                {
-                  "type": "actions",
-                  "elements": [
-                    {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "Go to job →",
-                        "emoji": true
-                      },
-                      "value": "go-to-job",
-                      "url": "https://github.com/${{ github.repository
-            }}/actions/runs/${{ github.run_id }}",
-                      "action_id": "go-to-job-action"
-                    }
-                  ]
-                }
-              ]
+              "repository": "${{ github.repository }}",
+              "jobUrl": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+              "message": "Drift check failed",
+              "details": ${{ toJSON(steps.pulumi.outputs.output) }}
             }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_DRIFTCHECK_WEBHOOK_URL }}
+
