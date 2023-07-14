@@ -49,6 +49,7 @@ jobs:
 
       - name: Run Pulumi 🚀
         uses: pulumi/actions@v4
+        id: pulumi
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
         with:
