@@ -5,14 +5,14 @@ import { bjerkio } from '../github-orgs';
 import { ProjectSlackLogger } from '../slack-logger';
 import { folder } from './folder';
 
-const config = new Config('tripletex-time-agent');
+const config = new Config('behalf');
 
 export const setup = new ProjectOnGithub(
-  'tripletex-time-agent',
+  'behalf',
   {
-    projectName: 'tripletex-time-agent',
+    projectName: 'behalf',
     folderId: folder.id,
-    repositories: ['tripletex-time-agent'],
+    repositories: ['behalf'],
   },
   { providers: [bjerkio] },
 );
@@ -48,14 +48,14 @@ export const apiServices = services.map(
       {
         service,
         disableOnDestroy: false,
-        project: 'tripletex-time-agent',
+        project: 'behalf',
       },
       { dependsOn: setup },
     ),
 );
 
 new ProjectSlackLogger(
-  'tripletex-time-agent',
+  'behalf',
   {
     channel: config.require('slack-channel'),
     projectId: setup.project.projectId,
