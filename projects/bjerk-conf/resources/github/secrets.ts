@@ -2,10 +2,10 @@ import * as github from '@pulumi/github';
 import { gitHubIdentityPoolProvider } from '../google/identity-pool';
 import { serviceAccount } from '../google/service-account';
 import { getGithubProvider } from './providers';
+import { githubProvider } from '../../../bjerk-io/src/github';
 
 const owner = 'bjerkio';
 const repo = 'conf';
-const provider = getGithubProvider(owner);
 
 new github.ActionsSecret(
   'google-service-account',
@@ -14,7 +14,7 @@ new github.ActionsSecret(
     secretName: 'GOOGLE_SERVICE_ACCOUNT',
     plaintextValue: serviceAccount.email,
   },
-  { provider, deleteBeforeReplace: true },
+  { provider: githubProvider, deleteBeforeReplace: true },
 );
 
 new github.ActionsSecret(
@@ -24,5 +24,5 @@ new github.ActionsSecret(
     secretName: 'WORKLOAD_IDENTITY_PROVIDER',
     plaintextValue: gitHubIdentityPoolProvider.name,
   },
-  { provider, deleteBeforeReplace: true },
+  { provider: githubProvider, deleteBeforeReplace: true },
 );

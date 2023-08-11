@@ -10,6 +10,7 @@ import {
 import { provider as coreProvider } from '../providers/core-google';
 import { invariant, notEmpty } from '../utils';
 import { IdentityPoolGithubSetup } from './identity-pool-github';
+import { githubProvider } from '../../../bjerk-io/src/github';
 
 // TODO: Wrap expiresAt with pulumi.Input
 interface ProjectRole {
@@ -250,7 +251,7 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
               plaintextValue: pulumiAccessToken.apply(t => t || ''),
               repository,
             },
-            { parent: this },
+            { parent: this, provider: githubProvider },
           ),
       );
     }
