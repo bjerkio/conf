@@ -251,7 +251,7 @@ export class ProjectOnGithub extends pulumi.ComponentResource {
               plaintextValue: pulumiAccessToken.apply(t => t || ''),
               repository,
             },
-            { parent: this, provider: githubProvider },
+            { parent: this },
           ),
       );
     }
