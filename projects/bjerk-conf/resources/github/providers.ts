@@ -1,5 +1,5 @@
 import * as github from '@pulumi/github';
-import { bjerkBotGitHubToken } from '../../../bjerk-io/src/stack-refs';
+import { bjerkBotGitHubToken } from '../../stack-refs';
 
 const githubProviders = new Map<string, github.Provider>();
 
