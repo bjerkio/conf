@@ -4,6 +4,7 @@ import {
   GithubIdentityPoolIamMember,
   identityPoolProvider,
 } from '../identity-pool';
+import { githubProvider } from '../../../bjerk-io/src/github';
 
 export interface IdentityPoolGithubArgs {
   repo: pulumi.Input<string>;
@@ -26,7 +27,7 @@ export class IdentityPoolGithubSetup extends pulumi.ComponentResource {
     new GithubIdentityPoolIamMember(
       name,
       { repo, owner, serviceAccountId },
-      { parent: this },
+      { parent: this, provider: githubProvider },
     );
 
     new github.ActionsSecret(
@@ -36,7 +37,7 @@ export class IdentityPoolGithubSetup extends pulumi.ComponentResource {
         secretName: 'GOOGLE_PROJECT_ID',
         plaintextValue: projectId,
       },
-      { parent: this, deleteBeforeReplace: true },
+      { parent: this, deleteBeforeReplace: true, provider: githubProvider },
     );
 
     new github.ActionsSecret(
@@ -46,7 +47,7 @@ export class IdentityPoolGithubSetup extends pulumi.ComponentResource {
         secretName: 'GOOGLE_SERVICE_ACCOUNT',
         plaintextValue: serviceAccountEmail,
       },
-      { parent: this, deleteBeforeReplace: true },
+      { parent: this, deleteBeforeReplace: true, provider: githubProvider },
     );
 
     new github.ActionsSecret(
@@ -56,7 +57,7 @@ export class IdentityPoolGithubSetup extends pulumi.ComponentResource {
         secretName: 'WORKLOAD_IDENTITY_PROVIDER',
         plaintextValue: identityPoolProvider.name,
       },
-      { parent: this, deleteBeforeReplace: true },
+      { parent: this, deleteBeforeReplace: true, provider: githubProvider },
     );
   }
 }
