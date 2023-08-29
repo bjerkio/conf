@@ -17,11 +17,14 @@ new gcp.projects.IAMMember('deploy-firebase-iam', {
   role: 'roles/firebasehosting.admin',
 });
 
-new github.ActionsSecret('deploy-url', {
-  secretName: 'GOOGLE_PROJECT_SA_KEY',
-  plaintextValue: saKey.privateKey.apply(k =>
-    Buffer.from(k, 'base64').toString('utf-8'),
-  ),
-  repository: 'website',
-  { provider: githubProvider }
-});
+new github.ActionsSecret(
+  'deploy-url',
+  {
+    secretName: 'GOOGLE_PROJECT_SA_KEY',
+    plaintextValue: saKey.privateKey.apply(k =>
+      Buffer.from(k, 'base64').toString('utf-8'),
+    ),
+    repository: 'website',
+  },
+  { provider: githubProvider },
+);
