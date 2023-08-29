@@ -1,8 +1,6 @@
 import * as github from '@pulumi/github';
 import * as pulumi from '@pulumi/pulumi';
-
-const config = new pulumi.Config();
-export const bjerkBotGitHubToken = config.requireSecret('temp-github-token');
+import { bjerkBotGitHubToken } from './stack-refs';
 
 export const githubProvider = new github.Provider('gh-provider', {
   owner: 'bjerkio',
