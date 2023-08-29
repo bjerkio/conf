@@ -1,5 +1,5 @@
 import * as github from '@pulumi/github';
-import { gitHubToken as token } from './stack-refs';
+import { bjerkBotGitHubToken as token } from './stack-refs';
 
 export const bjerkio = new github.Provider('bjerkio-provider', {
   owner: 'bjerkio',
