@@ -1,7 +1,7 @@
 import * as pulumi from '@pulumi/pulumi';
 
-const bjerkBot = new pulumi.StackReference('bjerk/bjerk-bot/prod');
+const bjerkBotStack = new pulumi.StackReference('Bjerk/bjerk-bot/prod');
 
 export const bjerkBotGitHubToken = pulumi.secret(
-  bjerkBot.requireOutput('gitHubToken'),
+  bjerkBotStack.requireOutput('githubToken'),
 );
