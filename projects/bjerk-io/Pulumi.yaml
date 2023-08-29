@@ -1,3 +1,5 @@
 name: bjerk-io-infra
 runtime: nodejs
 description: GCP bjerk-io
+config:
+  pulumi:disable-default-providers: ['*']
