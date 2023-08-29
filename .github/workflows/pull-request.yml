@@ -49,7 +49,7 @@ jobs:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
         with:
           command: preview
-          refresh: true
+          refresh: false
           stack-name: ${{ matrix.stack-name }}
           work-dir: projects/${{ matrix.project }}
           comment-on-pr: true
