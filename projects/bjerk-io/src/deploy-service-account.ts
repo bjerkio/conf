@@ -1,6 +1,7 @@
 import * as gcp from '@pulumi/gcp';
 import * as github from '@pulumi/github';
 import * as pulumi from '@pulumi/pulumi';
+import { githubProvider } from './github';
 
 const serviceAccount = new gcp.serviceaccount.Account('deploy-sa', {
   accountId: 'frontend-deploy',
@@ -22,4 +23,5 @@ new github.ActionsSecret('deploy-url', {
     Buffer.from(k, 'base64').toString('utf-8'),
   ),
   repository: 'website',
+  { provider: githubProvider }
 });
