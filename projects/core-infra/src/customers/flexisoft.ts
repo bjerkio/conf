@@ -1,4 +1,3 @@
-import * as pulumi from '@pulumi/pulumi';
 import { ProjectOnGithub } from '../components/projects-on-github';
 import { flexiSoft } from '../github-orgs';
 import { folder } from './folder';
