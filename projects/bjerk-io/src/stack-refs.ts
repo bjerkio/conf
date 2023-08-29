@@ -5,6 +5,3 @@ import * as pulumi from '@pulumi/pulumi';
 // export const bjerkBotGitHubToken = pulumi.secret(
 //   bjerkBot.requireOutput('gitHubToken'),
 // );
-
-const config = new pulumi.Config();
-export const bjerkBotGitHubToken = config.requireSecret('temp-github-token');
