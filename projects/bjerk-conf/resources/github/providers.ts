@@ -1,9 +1,7 @@
 import * as github from '@pulumi/github';
-import { bjerkBotGitHubToken } from '../../stack-refs';
+import { bjerkBotGitHubToken as token } from '../stack-refs';
 
 const githubProviders = new Map<string, github.Provider>();
-
-const token = bjerkBotGitHubToken;
 
 export function getGithubProvider(owner: string): github.Provider {
   if (!githubProviders.has(owner)) {
