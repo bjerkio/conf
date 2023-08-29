@@ -1,6 +1,1 @@
 config:
-  bjerk-conf:github-token:
-    secure: AAABAPHVya0OAwni/3n8vb9t92GR3dwAWHbXAPMppk+ZGMq3osCn2bWpX0eEyAhMi0ZTvpp6F9ucDj48EzIJw8MfsI5V35ya
-  bjerk-conf:github-token-expires-at: "2023-07-30T09:21:37.869Z"
-  bjerk-conf:github-token-id:
-    secure: AAABAKVO5zlOw54bufDPNBpYJl14X+EeC3z8ArADGs6qkPRF1rqQFzrr

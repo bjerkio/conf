@@ -1,2 +1,4 @@
 config:
+  bjerk-io-infra:temp-github-token:
+    secure: AAABAOABPdDZYE3snye7kgpLV6u9MQU0IbXjXCjZB8BFRpXen23CSJH+sEboYSyYVOychtwNMG1fsf52oEwm3P0J9OIsNn5B
   gcp:project: bjerk-io
