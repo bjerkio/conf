@@ -27,15 +27,23 @@ new ProjectSlackLogger(
   { provider: setup.googleProvider },
 );
 
-developers.map(
-  developer =>
-    new gcp.projects.IAMMember(
-      `timely-agent-${developer}-private-logs-viewer`,
-      {
-        member: developer,
-        role: 'roles/logging.privateLogViewer',
-        project: setup.project.projectId,
-      },
-      { provider: setup.googleProvider },
-    ),
-);
+developers.map(developer => {
+  new gcp.projects.IAMMember(
+    `timely-agent-${developer}-private-logs-viewer`,
+    {
+      member: developer,
+      role: 'roles/logging.privateLogViewer',
+      project: setup.project.projectId,
+    },
+    { provider: setup.googleProvider },
+  );
+  new gcp.projects.IAMMember(
+    `timely-agent-${developer}-cloud-run-viewer`,
+    {
+      member: developer,
+      role: 'roles/run.viewer',
+      project: setup.project.projectId,
+    },
+    { provider: setup.googleProvider },
+  );
+});
