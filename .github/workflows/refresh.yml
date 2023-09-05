@@ -23,7 +23,7 @@ jobs:
             stack-name: bjerk/prod
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v2
 
