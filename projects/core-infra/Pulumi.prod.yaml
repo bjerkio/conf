@@ -19,4 +19,4 @@ config:
     secure: AAABACso/J1kubbcGhP+wXpkXP679ghov0QEtzLfC6TjCValRouR8HuYCzrh/BHCA/4XUnngIOIiiIkEsV6sQk8t02uznm1kC64=
   slack:google-cloud-logger-slack-tag: latest
   timely-agent:slack-channel: C03BY6RB248
-  tripletex-time-agent:slack-channel: C03J6TVRVFG
+  behalf:slack-channel: C03J6TVRVFG
