@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "main": "src/index.ts",
   "dependencies": {
-    "@pulumi/gcp": "^6.55.0",
+    "@pulumi/gcp": "^7.0.0",
     "@pulumi/github": "^5.8.0",
     "@pulumi/pulumi": "^3.2.1"
   }
