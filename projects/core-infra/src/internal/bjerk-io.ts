@@ -16,7 +16,7 @@ export const setup = new ProjectOnGithub(
   { providers: [bjerkio] },
 );
 
-developers.map((developer) => new gcp.projects.IAMMember(
+developers.map((developer) => [new gcp.projects.IAMMember(
   `bjerk-io-${developer}-dns-admin`,
   {
     member: developer,
@@ -24,9 +24,7 @@ developers.map((developer) => new gcp.projects.IAMMember(
     project: setup.project.projectId,
   },
   { provider: setup.googleProvider },
-));
-
-developers.map((developer) => new gcp.projects.IAMMember(
+), new gcp.projects.IAMMember(
   `bjerk-io-${developer}-firebase-viewer`,
   {
     member: developer,
@@ -34,4 +32,12 @@ developers.map((developer) => new gcp.projects.IAMMember(
     project: setup.project.projectId,
   },
   { provider: setup.googleProvider },
-));
+), new gcp.projects.IAMMember(
+  `bjerk-io-${developer}-logger-admin`,
+  {
+    member: developer,
+    role: 'roles/logging.admin',
+    project: setup.project.projectId,
+  },
+  { provider: setup.googleProvider },
+)]);
