@@ -7,7 +7,7 @@ export const setup = new ProjectOnGithub(
   {
     projectName: 'bassene-web',
     folderId: folder.id,
-    repository: 'infra',
+    repository: 'conf',
   },
   { providers: [basssene] },
 );
