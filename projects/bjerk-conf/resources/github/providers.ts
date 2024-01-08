@@ -1,7 +1,9 @@
 import * as github from '@pulumi/github';
-import { bjerkBotGitHubToken as token } from '../stack-refs';
+import * as pulumi from '@pulumi/pulumi';
 
 const githubProviders = new Map<string, github.Provider>();
+
+const config = new pulumi.Config();
 
 export function getGithubProvider(owner: string): github.Provider {
   if (!githubProviders.has(owner)) {
@@ -9,7 +11,7 @@ export function getGithubProvider(owner: string): github.Provider {
       owner,
       new github.Provider(owner, {
         owner,
-        token,
+        token: config.requireSecret('github:token'),
       }),
     );
   }
