@@ -1,4 +1,4 @@
 config:
   gcp:project: bjerk-io
-  environment:
-    - mats-secrets
+environment:
+  - mats-secrets
