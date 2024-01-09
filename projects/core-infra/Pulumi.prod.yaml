@@ -10,7 +10,7 @@ config:
   branches:developers:
     - group:developers@bjerk.io
   github:token:
-    secure: AAABAFV2iNVa8uYxniCjg8903NVjQG4b9K6N4gcPlraAaszUTxUmkcft/IQm0j2NeqbTBGWH2Ei7xrtPpShS2hwaHHGE12rz
+    secure: AAABANk8xMXupcydASrJ8biHxcxD09z/3yb1BYH5k+aeCs0/5a5Eho919G2uMIEmF2hRwT0oZlg7FEtp3SJcqsjOZ+7wg1WBnv/tyEQU2Gc5rz1LE3d2z5FojKBxMGlOebjh/Nrycidptdcg+rtzmJhZDY3hnC3wtpVzwLk=
   intg-avfnor:slack-channel: C03KE9E4QEQ
   pulumi:token:
     secure: AAABALfUIspDSD6BHc//gBuigJQpEPekvfyM5HhY3UZdRov/qkl2Jams+B4BQmmaPUZeO4qWiyk/2ymYEiIOTmYvidWSLKKqM4ioUg==
