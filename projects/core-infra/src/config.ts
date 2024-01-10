@@ -15,3 +15,6 @@ export const branchesDevelopers =
 export const developers = config.requireObject<string[]>('developers');
 export const internalViewers =
   config.requireObject<string[]>('internal-viewers');
+
+const githubConfig = new pulumi.Config('github');
+export const githubToken = githubConfig.requireSecret('token');
