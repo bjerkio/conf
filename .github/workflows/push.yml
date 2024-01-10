@@ -54,4 +54,3 @@ jobs:
           command: up
           stack-name: ${{ matrix.stack-name }}
           work-dir: projects/${{ matrix.project }}
-          refresh: true
