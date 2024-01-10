@@ -1,9 +1,8 @@
 import * as github from '@pulumi/github';
 import * as pulumi from '@pulumi/pulumi';
+import { getToken } from 'get-pulumi-secret';
 
 const githubProviders = new Map<string, github.Provider>();
-
-const config = new pulumi.Config('github');
 
 export function getGithubProvider(owner: string): github.Provider {
   if (!githubProviders.has(owner)) {
@@ -11,7 +10,10 @@ export function getGithubProvider(owner: string): github.Provider {
       owner,
       new github.Provider(owner, {
         owner,
-        token: config.requireSecret('token'),
+        token: getToken({
+          name: `${owner}-token`,
+          namespace: 'github',
+        }),
       }),
     );
   }

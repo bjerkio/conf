@@ -87,6 +87,9 @@ importers:
       gcl-slack:
         specifier: ^3.0.0
         version: 3.0.0
+      get-pulumi-secret:
+        specifier: ^2.0.0
+        version: 2.0.0
     devDependencies:
       '@types/node':
         specifier: ^18.16.3

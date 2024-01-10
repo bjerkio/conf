@@ -8,7 +8,8 @@
     "@pulumi/github": "^5.8.0",
     "@pulumi/pulumi": "^3.65.1",
     "date-fns": "^2.30.0",
-    "gcl-slack": "^3.0.0"
+    "gcl-slack": "^3.0.0",
+    "get-pulumi-secret": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.16.3",
