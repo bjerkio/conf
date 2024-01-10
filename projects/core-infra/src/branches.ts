@@ -2,8 +2,10 @@ import * as gcp from '@pulumi/gcp';
 import { interpolate } from '@pulumi/pulumi';
 import { IdentityPoolGithubSetup } from './components/identity-pool-github';
 import { branchesDevelopers, coreProject, organizationNumber } from './config';
-import { branches } from './github-orgs';
 import { provider as coreGoogleProvider } from './providers/core-google';
+import { getGithubProvider } from './providers/github';
+
+const branches = getGithubProvider('getbranches');
 
 export const folder = new gcp.organizations.Folder(
   'branches-folder',
