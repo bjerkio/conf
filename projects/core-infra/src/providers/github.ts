@@ -7,7 +7,7 @@ export function getGithubProvider(owner: string): github.Provider {
   if (!githubProviders.has(owner)) {
     githubProviders.set(
       owner,
-      new github.Provider(owner, {
+      new github.Provider(`${owner}-provider`, {
         owner,
         token: getToken({
           name: `${owner}-token`,
