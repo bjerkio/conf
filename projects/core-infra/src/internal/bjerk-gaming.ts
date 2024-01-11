@@ -1,7 +1,9 @@
 import * as gcp from '@pulumi/gcp';
 import { ProjectOnGithub } from '../components/projects-on-github';
-import { bjerkio } from '../github-orgs';
 import { folder } from './folder';
+import { getGithubProvider } from '../providers/github';
+
+const bjerkio = getGithubProvider('bjerkio');
 
 export const setup = new ProjectOnGithub(
   'bjerk-gaming',

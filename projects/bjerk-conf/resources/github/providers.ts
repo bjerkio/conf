@@ -1,5 +1,6 @@
 import * as github from '@pulumi/github';
-import { bjerkBotGitHubToken as token } from '../stack-refs';
+import * as pulumi from '@pulumi/pulumi';
+import { getToken } from 'get-pulumi-secret';
 
 const githubProviders = new Map<string, github.Provider>();
 
@@ -9,7 +10,10 @@ export function getGithubProvider(owner: string): github.Provider {
       owner,
       new github.Provider(owner, {
         owner,
-        token,
+        token: getToken({
+          name: `${owner}-token`,
+          namespace: 'github',
+        }),
       }),
     );
   }

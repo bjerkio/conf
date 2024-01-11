@@ -1,6 +1,8 @@
 import * as github from '@pulumi/github';
 import { pulumiAccessToken } from './config';
-import { bjerkio } from './github-orgs';
+import { getGithubProvider } from './providers/github';
+
+const bjerkio = getGithubProvider('bjerkio');
 
 new github.ActionsSecret(
   'bot-pulumi',
