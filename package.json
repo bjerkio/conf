@@ -14,7 +14,7 @@
     "@bjerk/eslint-config": "^4.0.0",
     "@types/node": "^18.16.3",
     "eslint": "^9.0.0",
-    "husky": "^8.0.3",
+    "husky": "^9.0.0",
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
     "@simenandre/prettier": "5.0.0"
