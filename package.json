@@ -11,7 +11,7 @@
   },
   "prettier": "@simenandre/prettier",
   "devDependencies": {
-    "@bjerk/eslint-config": "^4.0.0",
+    "@bjerk/eslint-config": "^6.0.0",
     "@types/node": "^18.16.3",
     "eslint": "^9.0.0",
     "husky": "^8.0.3",
