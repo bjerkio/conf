@@ -10,10 +10,10 @@ importers:
     devDependencies:
       '@bjerk/eslint-config':
         specifier: ^4.0.0
-        version: 4.0.0(@typescript-eslint/eslint-plugin@5.62.0)(@typescript-eslint/parser@5.62.0)(eslint-config-prettier@8.10.0)(eslint-plugin-eslint-comments@3.2.0)(eslint-plugin-import@2.29.1)(eslint-plugin-prettier@4.2.1)(eslint-plugin-promise@6.1.1)(eslint-plugin-unicorn@46.0.1)(eslint@9.0.0)(prettier@2.8.8)
+        version: 4.0.0(@typescript-eslint/eslint-plugin@5.62.0)(@typescript-eslint/parser@5.62.0)(eslint-config-prettier@8.10.0)(eslint-plugin-eslint-comments@3.2.0)(eslint-plugin-import@2.29.1)(eslint-plugin-prettier@4.2.1)(eslint-plugin-promise@6.1.1)(eslint-plugin-unicorn@46.0.1)(eslint@9.0.0)(prettier@3.0.0)
       '@simenandre/prettier':
         specifier: 5.0.0
-        version: 5.0.0(prettier@2.8.8)
+        version: 5.0.0(prettier@3.0.0)
       '@types/node':
         specifier: ^18.16.3
         version: 18.16.3
@@ -27,8 +27,8 @@ importers:
         specifier: ^13.2.2
         version: 13.2.2
       prettier:
-        specifier: ^2.8.8
-        version: 2.8.8
+        specifier: ^3.0.0
+        version: 3.0.0
 
   projects/bjerk-conf:
     dependencies:
@@ -135,7 +135,7 @@ packages:
       regenerator-runtime: 0.14.1
     dev: false
 
-  /@bjerk/eslint-config@4.0.0(@typescript-eslint/eslint-plugin@5.62.0)(@typescript-eslint/parser@5.62.0)(eslint-config-prettier@8.10.0)(eslint-plugin-eslint-comments@3.2.0)(eslint-plugin-import@2.29.1)(eslint-plugin-prettier@4.2.1)(eslint-plugin-promise@6.1.1)(eslint-plugin-unicorn@46.0.1)(eslint@9.0.0)(prettier@2.8.8):
+  /@bjerk/eslint-config@4.0.0(@typescript-eslint/eslint-plugin@5.62.0)(@typescript-eslint/parser@5.62.0)(eslint-config-prettier@8.10.0)(eslint-plugin-eslint-comments@3.2.0)(eslint-plugin-import@2.29.1)(eslint-plugin-prettier@4.2.1)(eslint-plugin-promise@6.1.1)(eslint-plugin-unicorn@46.0.1)(eslint@9.0.0)(prettier@3.0.0):
     resolution: {integrity: sha512-xcoaQg4Y3zquJEEen9df5vh1VOHp6kOJqP0Obw0Z2UiH02runHMJ22xxnhBV3A/98jE8iTyhQWHz3A0GifFtwA==}
     engines: {node: '>=16'}
     peerDependencies:
@@ -159,10 +159,10 @@ packages:
       eslint-config-prettier: 8.10.0(eslint@9.0.0)
       eslint-plugin-eslint-comments: 3.2.0(eslint@9.0.0)
       eslint-plugin-import: 2.29.1(@typescript-eslint/parser@5.62.0)(eslint@9.0.0)
-      eslint-plugin-prettier: 4.2.1(eslint-config-prettier@8.10.0)(eslint@9.0.0)(prettier@2.8.8)
+      eslint-plugin-prettier: 4.2.1(eslint-config-prettier@8.10.0)(eslint@9.0.0)(prettier@3.0.0)
       eslint-plugin-promise: 6.1.1(eslint@9.0.0)
       eslint-plugin-unicorn: 46.0.1(eslint@9.0.0)
-      prettier: 2.8.8
+      prettier: 3.0.0
     dev: true
 
   /@cspotcode/source-map-support@0.8.1:
@@ -571,12 +571,12 @@ packages:
     resolution: {integrity: sha512-xfo+yLRM2zVjVEA4p23IjQWzyWl1ZhWOGobsBqRpIarzLvwNH/RAGaoehdxlhx4X92302DrpdIFgTICMN4P38w==}
     dev: false
 
-  /@simenandre/prettier@5.0.0(prettier@2.8.8):
+  /@simenandre/prettier@5.0.0(prettier@3.0.0):
     resolution: {integrity: sha512-IsU3GTZcr8D5U9tzeP80rOntXqPZwA0B0gw448rJaK99st9I85CN4g2mEO0qFatdOsXSPmay+tWiYe3MVWb3IA==}
     peerDependencies:
       prettier: ^3.0.0
     dependencies:
-      prettier: 2.8.8
+      prettier: 3.0.0
     dev: true
 
   /@sinclair/typebox@0.28.20:
@@ -1635,7 +1635,7 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-prettier@4.2.1(eslint-config-prettier@8.10.0)(eslint@9.0.0)(prettier@2.8.8):
+  /eslint-plugin-prettier@4.2.1(eslint-config-prettier@8.10.0)(eslint@9.0.0)(prettier@3.0.0):
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -1648,7 +1648,7 @@ packages:
     dependencies:
       eslint: 9.0.0
       eslint-config-prettier: 8.10.0(eslint@9.0.0)
-      prettier: 2.8.8
+      prettier: 3.0.0
       prettier-linter-helpers: 1.0.0
     dev: true
 
@@ -2990,9 +2990,9 @@ packages:
       fast-diff: 1.3.0
     dev: true
 
-  /prettier@2.8.8:
-    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
-    engines: {node: '>=10.13.0'}
+  /prettier@3.0.0:
+    resolution: {integrity: sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==}
+    engines: {node: '>=14'}
     hasBin: true
     dev: true
 
