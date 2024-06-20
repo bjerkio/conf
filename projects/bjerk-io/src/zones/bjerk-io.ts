@@ -131,18 +131,6 @@ new gcp.dns.RecordSet(
 );
 
 new gcp.dns.RecordSet(
-  'bjerk-io-reporting',
-  {
-    managedZone,
-    name: 'reporting.bjerk.io.',
-    rrdatas: ['34.88.68.230'],
-    ttl,
-    type: 'A',
-  },
-  opts,
-);
-
-new gcp.dns.RecordSet(
   'bjerk-io-studio',
   {
     managedZone,
@@ -165,4 +153,3 @@ new gcp.dns.RecordSet(
   },
   opts,
 );
-
