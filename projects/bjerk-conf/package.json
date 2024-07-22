@@ -14,7 +14,7 @@
     "rotate-pulumi-secret": "^2.0.0"
   },
   "devDependencies": {
-    "@types/node": "^18.16.3",
+    "@types/node": "^20.0.0",
     "ts-node": "^10.9.1"
   }
 }
