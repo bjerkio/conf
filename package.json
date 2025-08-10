@@ -16,7 +16,7 @@
     "eslint": "^9.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
-    "prettier": "^2.8.8",
+    "prettier": "^3.0.0",
     "@simenandre/prettier": "5.0.0"
   },
   "engines": {
